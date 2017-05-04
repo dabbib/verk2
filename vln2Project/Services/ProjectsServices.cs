@@ -27,13 +27,14 @@ namespace h37.Services
         {
             Project newProject = new Project();
             newProject.projectName = projectName;
-            newProject.projectOwner = null;
+            newProject.projectOwnerID = userID;
+            newProject.type = type;
+            newProject.numberOfFiles = 0;
+            createFile(newProject.projectID, "index." + type);
             db.Projects.Add(newProject);
             db.SaveChanges();
-            
-            /* Todo */
 
-            return 0;
+            return newProject.projectID;
         }
         /// <summary>
         /// This function deletes projects
@@ -53,8 +54,11 @@ namespace h37.Services
         /// <returns>fileID of file created</returns>
         public int createFile(int projectID, string fileName)
         {
-            /* Todo */
-            return 0;
+            File newFile = new File();
+            newFile.fileName = fileName;
+            newFile.fileType = getProjectType(projectID).ToString();
+            incrementProjectFileCounter(projectID);
+            return newFile.fileID;
         }
         /// <summary>
         /// This function deletes a single file from a given project
@@ -87,6 +91,43 @@ namespace h37.Services
         {
             /* Todo */
             return null;
+        }
+
+
+        /*
+         * The following functions are private helper functions 
+         * for the other functions in ProjectServices.
+         */
+         /// <summary>
+         /// 
+         /// </summary>
+         /// <param name="projectID"></param>
+         /// <returns></returns>
+        private projectType getProjectType(int projectID)
+        {
+            Project p = (from x in db.Projects
+                         where x.projectID.Equals(projectID)
+                         select x).SingleOrDefault();
+            if(p == null)
+            {
+                /* Todo  project does not exist exception */
+            }
+            return p.type;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="projectID"></param>
+        private void incrementProjectFileCounter(int projectID)
+        {
+            Project p = (from x in db.Projects
+                         where x.projectID.Equals(projectID)
+                         select x).SingleOrDefault();
+            if(p == null)
+            {
+                /* Todo project not found exception */
+            }
+            p.numberOfFiles++;
         }
 
     }
