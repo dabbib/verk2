@@ -23,9 +23,16 @@ namespace h37.Services
         /// <param name="userID">ID of the user creating the project</param>
         /// <param name="type">Type of project</param>
         /// <returns></returns>
-        public int createProject(int userID, projectType type)
+        public int createProject(int userID, string projectName, projectType type)
         {
+            Project newProject = new Project();
+            newProject.projectName = projectName;
+            newProject.projectOwner = null;
+            db.Projects.Add(newProject);
+            db.SaveChanges();
+            
             /* Todo */
+
             return 0;
         }
         /// <summary>
