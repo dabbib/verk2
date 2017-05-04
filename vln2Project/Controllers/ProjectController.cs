@@ -16,5 +16,21 @@ namespace h37.Controllers
         {
             return View();
         }
+
+        public ActionResult ProjectName (string name)
+        {
+            var ProjectViewModelName = _service.GetProjectByName(name);
+
+            return View(ProjectViewModelName);
+
+        }
+
+        public ActionResult numberOfFiles(int files)
+        {
+            var ProjectViewModelFiles = _service.GetProjectByFiles(files);
+
+            return View(ProjectViewModelFiles);
+
+        }
     }
 }
