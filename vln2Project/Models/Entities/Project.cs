@@ -8,6 +8,7 @@ namespace h37.Models.Entities
     public class Project
     {
         public enum projectType { js = 0, cs = 1}
+
         public int projectID { get; set;}
         public string projectName { get; set; }
         public User projectOwner { get; set; }

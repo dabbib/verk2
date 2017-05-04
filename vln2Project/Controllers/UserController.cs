@@ -13,5 +13,25 @@ namespace h37.Controllers
         {
             return View();
         }
+
+        public ActionResult Index(int userID)
+        {
+            return View();
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        public ActionResult Logout()
+        {
+            return View();
+        }
     }
 }
