@@ -10,8 +10,10 @@ namespace h37.Models.Entities
         /// <summary>
         /// Entity class for projects
         /// </summary>
-        public int id { get; set;}
-        public string name { get; set; }
+        public int projectID { get; set;}
+        public string projectName { get; set; }
+        public User projectOwner { get; set; }
         public int numberOfFiles { get; set; }
+        public List<File> fileList { get; set; }
     }
 }

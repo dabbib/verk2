@@ -10,9 +10,9 @@ namespace h37.Models.Entities
         /// <summary>
         /// Entity class for Files
         /// </summary>
-        public int fileid { get; set; }
-        public string filename { get; set; }
-        public string filetype { get; set; }
+        public int fileID { get; set; }
+        public string fileName { get; set; }
+        public string fileType { get; set; }
        
     }
 }
