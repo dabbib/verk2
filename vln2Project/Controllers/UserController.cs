@@ -1,4 +1,5 @@
-﻿using System;
+﻿using h37.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace h37.Controllers
 {
     public class UserController : Controller
     {
+        private UserServices _service = new UserServices();
+
         // GET: User
         public ActionResult Index()
         {
@@ -16,7 +19,9 @@ namespace h37.Controllers
 
         public ActionResult Index(int userID)
         {
-            return View();
+            var UserViewModelID = _service.getUserID(userID);
+
+            return View(UserViewModelID);
         }
 
         public ActionResult Login()
