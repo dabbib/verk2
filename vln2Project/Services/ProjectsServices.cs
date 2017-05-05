@@ -51,6 +51,15 @@ namespace h37.Services
             return p;
         }
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="projectID"></param>
+        /// <returns></returns>
+        public int getNumberOfFilesInProject(int projectID)
+        {
+            return getProjectByID(projectID).numberOfFiles;
+        }
+        /// <summary>
         /// This function deletes projects
         /// </summary>
         /// <param name="projectID"></param>

@@ -17,17 +17,17 @@ namespace h37.Controllers
             return View();
         }
 
-        public ActionResult ProjectName (string name)
+        public ActionResult ProjectName (int projectID)
         {
-            var ProjectViewModelName = _service.getProjectByName(name);
+            var ProjectViewModelName = _service.getProjectByID(projectID);
 
             return View(ProjectViewModelName);
 
         }
 
-        public ActionResult numberOfFiles(int files)
+        public ActionResult numberOfFiles(int projectID)
         {
-            var ProjectViewModelFiles = _service.getNumberOfFilesInProject(files);
+            var ProjectViewModelFiles = _service.getNumberOfFilesInProject(projectID);
 
             return View(ProjectViewModelFiles);
 
