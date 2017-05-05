@@ -23,27 +23,5 @@ namespace h37.Controllers
 
             return View(UserViewModelID);
         }
-        /*
-        public ActionResult Index(int id)
-        {
-            var UserViewModelID = _service.getUserID(id);
-
-            return View(UserViewModelID);
-        }*/
-
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        public ActionResult Logout()
-        {
-            return View();
-        }
     }
 }

@@ -26,9 +26,7 @@ namespace h37.Services
         public int createUser(string userName, string password)
         {
             /* todo create new User */
-            User newUser = new User();
-            newUser.userName = userName;
-            newUser.password = password;
+            User newUser = new User(userName, password);
             db.SystemUsers.Add(newUser);
             db.SaveChanges();
 
