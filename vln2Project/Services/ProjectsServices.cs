@@ -1,10 +1,8 @@
 ﻿using h37.Models;
 using h37.Models.Entities;
-using h37.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using static h37.Models.Entities.Project;
 
 namespace h37.Services
@@ -30,11 +28,27 @@ namespace h37.Services
             newProject.projectOwnerID = userID;
             newProject.type = type;
             newProject.numberOfFiles = 0;
-            createFile(newProject.projectID, "index." + type);
+            createFile(newProject.projectID, userID, "index." + type);
             db.Projects.Add(newProject);
             db.SaveChanges();
 
             return newProject.projectID;
+        }
+        /// <summary>
+        /// Function to get projects by id
+        /// </summary>
+        /// <param name="projectID"></param>
+        /// <returns>Single project</returns>
+        public Project getProjectByID(int projectID)
+        {
+            Project p = (from x in db.Projects
+                         where x.projectID.Equals(projectID)
+                         select x).SingleOrDefault();
+            if(p == null)
+            {
+                /* Todo exceptions if project does not exist */
+            }
+            return p;
         }
         /// <summary>
         /// This function deletes projects
@@ -52,12 +66,17 @@ namespace h37.Services
         /// <param name="projectID"></param>
         /// <param name="fileName"></param>
         /// <returns>fileID of file created</returns>
-        public int createFile(int projectID, string fileName)
+        public int createFile(int projectID, int userID, string fileName)
         {
             File newFile = new File();
             newFile.fileName = fileName;
             newFile.fileType = getProjectType(projectID).ToString();
             incrementProjectFileCounter(projectID);
+            Event newEvent = new Event(userID, DateTime.Now, 0);
+            db.Events.Add(newEvent);
+            db.SaveChanges();
+            db.Files.Add(newFile);
+            db.SaveChanges();
             return newFile.fileID;
         }
         /// <summary>

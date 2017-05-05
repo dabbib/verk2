@@ -1,4 +1,6 @@
-﻿using System;
+﻿using h37.Models;
+using h37.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -27,8 +29,8 @@ namespace h37.Services
             User newUser = new User();
             newUser.userName = userName;
             newUser.password = password;
-            db.User.Add(newUser);
-            db.Savechanges();
+            db.Users.Add(newUser);
+            db.SaveChanges();
 
             return 0;
         }
@@ -42,10 +44,10 @@ namespace h37.Services
             /* todo return User name */
             return 0;
         }
-        public List<project> getProjects(int userID)
+        public List<Project> getProjects(int userID)
         {
             /* return list of  projects */
-            return 0;
+            return null;
         }
     }
 }

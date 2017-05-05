@@ -7,6 +7,12 @@ namespace h37.Models.Entities
 {
     public class Event
     {
+        public Event(int userID, DateTime timestamp, eventType type)
+        {
+            this.userID = userID;
+            this.timestamp = timestamp;
+            this.type = type;
+        }
         public enum eventType { created = 0, modified = 1 }
 
         public int userID { get; set; }
