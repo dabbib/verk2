@@ -13,6 +13,7 @@ namespace h37.Models.Entities
         public int fileID { get; set; }
         public string fileName { get; set; }
         public string fileType { get; set; }
+        /* Todo create field for the content of the file ! */
        
     }
 }

@@ -64,10 +64,15 @@ namespace h37.Services
         /// </summary>
         /// <param name="projectID"></param>
         /// <returns>Returns the projectID</returns>
-        public int deleteProject(int projectID)
+        public void deleteProject(int projectID)
         {
-            /* Todo */
-            return 0;
+            var fileList = getFiles(projectID);
+            foreach(File x in fileList)
+            {
+                deleteFile(x.fileID);
+            }
+            db.Projects.Remove(getProjectByID(projectID));
+            db.SaveChanges();
         }
         /// <summary>
         /// This function creates a new file in a given project
@@ -89,27 +94,34 @@ namespace h37.Services
             return newFile.fileID;
         }
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileID"></param>
+        /// <returns></returns>
+        public File getFileByID(int fileID)
+        {
+            var f = (from x in db.Files
+                     where x.fileID.Equals(fileID)
+                     select x).SingleOrDefault();
+            if(f == null)
+            {
+                /* Todo exception */
+            }
+            return f;
+        }
+        /// <summary>
         /// This function deletes a single file from a given project
         /// </summary>
         /// <param name="fileID"></param>
         /// <returns>fileID of the file deleted</returns>
-        public int deleteFile(int fileID)
+        public void deleteFile(int fileID)
         {
-            /* Todo */
-            return 0;
-        }
-        public void subscribeUser(int projectID, string userName)
-        {
-            /* Todo */
-        }
-        public void unsubscribeUser(int projectID, string userName)
-        {
-            /* Todo */
+            db.Files.Remove(getFileByID(fileID));
+            db.SaveChanges();
         }
         public List<File> getFiles(int projectID)
         {
-            /* Todo */
-            return null;
+            return getProjectByID(projectID).fileList;
         }
         public void logEvent(int userID, int fileID)
         {
