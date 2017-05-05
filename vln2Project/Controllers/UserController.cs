@@ -12,6 +12,7 @@ namespace h37.Controllers
         private UserServices _service = new UserServices();
 
         // GET: User
+        [Authorize]
         public ActionResult Index(int? id)
         {
             if(id == null)
