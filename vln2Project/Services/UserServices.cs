@@ -29,7 +29,7 @@ namespace h37.Services
             User newUser = new User();
             newUser.userName = userName;
             newUser.password = password;
-            //db.Users.Add(newUser);
+            db.SystemUsers.Add(newUser);
             db.SaveChanges();
 
             return 0;
