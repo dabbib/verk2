@@ -23,11 +23,7 @@ namespace h37.Services
         /// <returns></returns>
         public int createProject(int userID, string projectName, projectType type)
         {
-            Project newProject = new Project();
-            newProject.projectName = projectName;
-            newProject.projectOwnerID = userID;
-            newProject.type = type;
-            newProject.numberOfFiles = 0;
+            Project newProject = new Project(projectName, userID, type);
             createFile(newProject.projectID, userID, "index." + type);
             db.Projects.Add(newProject);
             db.SaveChanges();
@@ -82,14 +78,11 @@ namespace h37.Services
         /// <returns>fileID of file created</returns>
         public int createFile(int projectID, int userID, string fileName)
         {
-            File newFile = new File();
-            newFile.fileName = fileName;
-            newFile.fileType = getProjectType(projectID).ToString();
+            File newFile = new File(fileName, getProjectType(projectID).ToString(), projectID);
             incrementProjectFileCounter(projectID);
-            Event newEvent = new Event(userID, DateTime.Now, 0);
-            db.Events.Add(newEvent);
-            db.SaveChanges();
+            Event newEvent = new Event(userID, newFile.fileID, DateTime.Now, Event.eventType.created);
             db.Files.Add(newFile);
+            db.Events.Add(newEvent);
             db.SaveChanges();
             return newFile.fileID;
         }
@@ -116,21 +109,32 @@ namespace h37.Services
         /// <returns>fileID of the file deleted</returns>
         public void deleteFile(int fileID)
         {
+            decrementProjectFileCounter(getFileByID(fileID).projectID);
             db.Files.Remove(getFileByID(fileID));
             db.SaveChanges();
         }
+
+
+
         public List<File> getFiles(int projectID)
         {
-            return getProjectByID(projectID).fileList;
+            List<File> f = (from x in db.Files
+                            where x.projectID.Equals(projectID)
+                            select x).ToList();
+            return f;
         }
         public void logEvent(int userID, int fileID)
         {
-            /* Todo */
+            Event e = new Event(userID, fileID, DateTime.Now, Event.eventType.modified);
+            db.Events.Add(e);
+            db.SaveChanges();
         }
         public List<Event> getEventLog(int fileID)
         {
-            /* Todo */
-            return null;
+            List<Event> e = (from x in db.Events
+                             where x.fileID.Equals(fileID)
+                             select x).ToList();
+            return e;
         }
 
 
@@ -145,14 +149,7 @@ namespace h37.Services
          /// <returns></returns>
         private projectType getProjectType(int projectID)
         {
-            Project p = (from x in db.Projects
-                         where x.projectID.Equals(projectID)
-                         select x).SingleOrDefault();
-            if(p == null)
-            {
-                /* Todo  project does not exist exception */
-            }
-            return p.type;
+            return getProjectByID(projectID).type;
         }
         /// <summary>
         /// 
@@ -160,14 +157,16 @@ namespace h37.Services
         /// <param name="projectID"></param>
         private void incrementProjectFileCounter(int projectID)
         {
-            Project p = (from x in db.Projects
-                         where x.projectID.Equals(projectID)
-                         select x).SingleOrDefault();
-            if(p == null)
-            {
-                /* Todo project not found exception */
-            }
+            Project p = getProjectByID(projectID);
             p.numberOfFiles++;
+            db.SaveChanges();
+        }
+
+        private void decrementProjectFileCounter(int projectID)
+        {
+            Project p = getProjectByID(projectID);
+            p.numberOfFiles--;
+            db.SaveChanges();
         }
 
     }
