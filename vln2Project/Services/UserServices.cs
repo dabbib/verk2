@@ -49,5 +49,13 @@ namespace h37.Services
             /* return list of  projects */
             return null;
         }
+        public void subscribeUser(int projectID, string userName)
+        {
+            /* Todo */
+        }
+        public void unsubscribeUser(int projectID, string userName)
+        {
+            /* Todo */
+        }
     }
 }
