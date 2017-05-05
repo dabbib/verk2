@@ -5,11 +5,8 @@ using System.Web;
 
 namespace h37.Models.ViewModels
 {
-    public class ProjectViewModel
+    public class ProjectEditViewModel
     {
-        public string projectName { get; set; }
-
-        public int numberOfFiles { get; set; }
-
+        /// TODO:
     }
 }
