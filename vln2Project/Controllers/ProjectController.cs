@@ -19,7 +19,7 @@ namespace h37.Controllers
 
         public ActionResult ProjectName (string name)
         {
-            var ProjectViewModelName = _service.GetProjectByName(name);
+            var ProjectViewModelName = _service.getProjectByName(name);
 
             return View(ProjectViewModelName);
 
@@ -27,7 +27,7 @@ namespace h37.Controllers
 
         public ActionResult numberOfFiles(int files)
         {
-            var ProjectViewModelFiles = _service.GetProjectByFiles(files);
+            var ProjectViewModelFiles = _service.getNumberOfFilesInProject(files);
 
             return View(ProjectViewModelFiles);
 
