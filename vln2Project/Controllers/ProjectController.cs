@@ -16,7 +16,7 @@ namespace h37.Controllers
         {
             return View();
         }
-
+        /*
         public ActionResult ProjectName (string name)
         {
             var ProjectViewModelName = _service.getProjectByName(name);
@@ -31,6 +31,6 @@ namespace h37.Controllers
 
             return View(ProjectViewModelFiles);
 
-        }
+        }*/
     }
 }

@@ -12,17 +12,24 @@ namespace h37.Controllers
         private UserServices _service = new UserServices();
 
         // GET: User
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            return View();
-        }
+            if(id == null)
+            {
+                return View();
+            }
 
+            var UserViewModelID = _service.getUserID(id.Value);
+
+            return View(UserViewModelID);
+        }
+        /*
         public ActionResult Index(int id)
         {
             var UserViewModelID = _service.getUserID(id);
 
             return View(UserViewModelID);
-        }
+        }*/
 
         public ActionResult Login()
         {
