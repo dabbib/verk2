@@ -32,15 +32,29 @@ namespace h37.Services
 
             return 0;
         }
-        public int getUserID(int userID)
+        public User getUserByID(int userID)
         {
             /* todo return UserID  */
-            return 0;
+            User id = (from x in db.User
+                       where x.userID.Equals(userID)
+                       select x).SingleOrDefault();
+            if (id == null)
+            {
+                /* Todo exception if búbú */
+            }
+            return id;
         }
-        public int getName(string userName)
+        public User getUserByName(string userName)
         {
             /* todo return User name */
-            return 0;
+            User n = (from x in db.User
+                      where x.userName.Equals(userName)
+                      select x).SingleOrDefault();
+            if (n == null)
+            {
+                /* Todo exception if búbú */
+            }
+            return n;
         }
         public List<Project> getProjects(int userID)
         {
