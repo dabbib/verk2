@@ -17,9 +17,9 @@ namespace h37.Controllers
             return View();
         }
 
-        public ActionResult Index(int userID)
+        public ActionResult Index(int id)
         {
-            var UserViewModelID = _service.getUserID(userID);
+            var UserViewModelID = _service.getUserID(id);
 
             return View(UserViewModelID);
         }
