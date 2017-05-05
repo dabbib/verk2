@@ -7,5 +7,8 @@ namespace h37.Models.ViewModels
 {
     public class UserViewModel
     {
+        public string userName { get; set; }
+
+        public string userID { get; set; }
     }
 }
