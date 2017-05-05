@@ -35,7 +35,7 @@ namespace h37.Services
         public User getUserByID(int userID)
         {
             /* todo return UserID  */
-            User id = (from x in db.User
+            User id = (from x in db.SystemUsers
                        where x.userID.Equals(userID)
                        select x).SingleOrDefault();
             if (id == null)
@@ -47,7 +47,7 @@ namespace h37.Services
         public User getUserByName(string userName)
         {
             /* todo return User name */
-            User n = (from x in db.User
+            User n = (from x in db.SystemUsers
                       where x.userName.Equals(userName)
                       select x).SingleOrDefault();
             if (n == null)

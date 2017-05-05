@@ -20,7 +20,7 @@ namespace h37.Controllers
                 return View();
             }
 
-            var UserViewModelID = _service.getUserID(id.Value);
+            var UserViewModelID = _service.getUserByID(id.Value);
 
             return View(UserViewModelID);
         }
