@@ -1,14 +1,12 @@
 ﻿using h37.Models;
 using h37.Models.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 
 namespace h37.Services
 {
-    
+
     public class UserServices
     {
         private ApplicationDbContext db;
@@ -17,22 +15,8 @@ namespace h37.Services
         {
             db = new ApplicationDbContext();
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public int createUser(string userName, string password)
-        {
-            /* todo create new User */
-            User newUser = new User(userName, password);
-            db.SystemUsers.Add(newUser);
-            db.SaveChanges();
-
-            return 0;
-        }
-        public User getUserByID(int userID)
+        
+        public AccountViewModels getUserByID(int userID)
         {
             /* todo return UserID  */
             User id = (from x in db.SystemUsers
