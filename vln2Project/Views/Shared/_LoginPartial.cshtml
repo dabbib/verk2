@@ -15,8 +15,30 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    string path = HttpContext.Current.Request.Url.AbsolutePath;
+    if (path == "/Account/Login")
+    {
+        <ul class="bar-of-right">
+            <li>@Html.ActionLink("Register", "Register", "Account", new { area = "" }, new { @class = "btn btn-primary" })</li>
+        </ul>
+    }
+
+    else if (path == "/Account/Register")
+    {
+        <ul class="bar-of-right">
+            <li>@Html.ActionLink("Log in", "Login", "Account", new { area = "" }, new { @class = "btn btn-primary" })</li>
+        </ul>
+    }
+
+    else
+    {
+        <li>@Html.ActionLink("Register", "Register", "Account", new { area = "" }, new { @class = "btn btn-primary" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", new { area = "" }, new { @class = "btn btn-primary" })</li>
+
+        <!--Original Register and Login links
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>-->
+    }
 }
