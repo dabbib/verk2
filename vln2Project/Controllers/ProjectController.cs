@@ -17,6 +17,11 @@ namespace h37.Controllers
             return View();
         }
 
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
         public ActionResult projectName (int projectID)
         {
             var ProjectViewModelName = _service.getProjectByID(projectID);

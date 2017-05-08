@@ -24,6 +24,7 @@ namespace h37.Models
         public DbSet<Project> Projects { get; set; }
         public DbSet<File> Files { get; set; }
         public DbSet<usersInProjects> SystemUsers { get; set; }
+        public DbSet<User> UsersInfo { get; set; }
         public DbSet<Event> Events { get; set; }
 
         /* Todo map all entity classes */

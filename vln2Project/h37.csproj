@@ -219,6 +219,7 @@
     <Compile Include="Models\Entities\Event.cs" />
     <Compile Include="Models\Entities\File.cs" />
     <Compile Include="Models\Entities\Project.cs" />
+    <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\Entities\usersInProjects.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -298,6 +299,7 @@
     <Content Include="Views\Project\Config.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="3rdParty\src\" />
     <Folder Include="App_Data\" />
     <Folder Include="Handlers\" />
   </ItemGroup>
