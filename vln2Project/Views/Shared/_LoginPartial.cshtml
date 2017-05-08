@@ -26,14 +26,14 @@ else
     else if (path == "/Account/Register")
     {
         <ul class="bar-of-right">
-            <li>@Html.ActionLink("Log in", "Login", "Account", new { area = "" }, new { @class = "btn btn-primary" })</li>
+            <li>@Html.ActionLink("Log in", "Login", "Account", new { area = "" }, new { @class = "btn btn-success big-success-btn" })</li>
         </ul>
     }
 
     else
     {
         <li>@Html.ActionLink("Register", "Register", "Account", new { area = "" }, new { @class = "btn btn-primary" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", new { area = "" }, new { @class = "btn btn-primary" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", new { area = "" }, new { @class = "btn btn-success big-success-btn" })</li>
 
         <!--Original Register and Login links
         <ul class="nav navbar-nav navbar-right">

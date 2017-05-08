@@ -1,6 +1,53 @@
 ﻿body {
 }
 
+#bg-right {
+    background-color: lightblue;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 95%;
+    right: 0;
+    z-index: -1;
+}
+
+#bg-left {
+    background-color: lightblue;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 95%;
+    z-index: -1;
+}
+
+#bg-bottom {
+    background-color: lightblue;
+    position: fixed;
+    top: 95%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+
+#register-thing {
+    padding-left: 15px;
+}
+
+#mydiv {
+    display: inline-block;
+    float: left;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    width:25em;
+    height:20em;
+    margin-top: -9em; /*set to a negative number 1/2 of your height*/
+    margin-left: -15em; /*set to a negative number 1/2 of your width*/
+}
+
 ul {
     list-style-type: none;
 }
@@ -8,6 +55,15 @@ ul {
 .btn-primary {
     border-style: solid;
     border-color: dodgerblue;
+    float: left;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.big-success-btn {
+    border-style: solid;
+    border-color: forestgreen;
     float: left;
     padding: 15px 15px;
     font-size: 18px;
@@ -30,7 +86,7 @@ ul {
 
 .navbar-inverse {
     background-color: lightblue;
-    border-color: white;
+    border-color: lightblue;
 }
 
 .navbar-fixed-top,
