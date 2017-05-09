@@ -20,7 +20,6 @@ namespace h37.Models.Entities
         public string fileName { get; set; }
         public string fileType { get; set; }
         public int projectID { get; set; }
-        /* Todo create field for the content of the file ! */
-       
+        public string content { get; set; }       
     }
 }

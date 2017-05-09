@@ -19,27 +19,11 @@ namespace h37.Services
         
         public User getUserByID(int userID)
         {
-            /* todo return UserID  */
-            User id = (from x in db.UsersInfo
-                       where x.userID.Equals(userID)
-                       select x).SingleOrDefault();
-            if (id == null)
-            {
-                /* Todo exception if búbú */
-            }
-            return id;
+            return null;
         }
         public User getUserByName(string userName)
         {
-            /* todo return User name */
-            User n = (from x in db.UsersInfo
-                      where x.userName.Equals(userName)
-                      select x).SingleOrDefault();
-            if (n == null)
-            {
-                /* Todo exception if búbú */
-            }
-            return n;
+            return null;
         }
         public List<Project> getProjects(int userID)
         {

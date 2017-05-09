@@ -13,6 +13,7 @@ namespace h37.Models.Entities
             this.userID = userID;
             this.projectID = projectID;
         }
+        public int id { get; set; }
         public string userID { get; set; }
         public int projectID { get; set; }
     }
