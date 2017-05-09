@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using static h37.Models.Entities.Project;
 
 namespace h37.Models.ViewModels
 {
@@ -9,6 +10,6 @@ namespace h37.Models.ViewModels
     {
         public string projectName { get; set; }
 
-        public int projectType { get; set; }
+        public projectType projectType { get; set; }
     }
 }
