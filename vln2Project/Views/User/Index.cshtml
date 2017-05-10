@@ -1,4 +1,4 @@
-﻿@model IEnumerable<h37.Models.ViewModels.ProjectViewModels>
+﻿@model IEnumerable<h37.Models.ViewModels.ProjectViewModel>
 @{
     ViewBag.Title = "Index";
 }
@@ -9,14 +9,16 @@
         @foreach (var item in Model)
         {
             <div class="col-xs-4 project table-bordered">
-                <h2>@Html.DisplayFor(modelItem => item.projectName)</h2>
-                <p>Number of files: @Html.DisplayFor(modelItem => item.numberOfFiles)</p>
+                <h2>Name: @Html.DisplayFor(x => item.projectName)</h2>
+                <p>Number of files: @Html.DisplayFor(x => item.numberOfFiles)</p>
                 @Html.ActionLink("Edit", "Edit", new { projectID = item.projectID }, new { @class = "btn btn-primary" })
             </div>
         }
+
     </div>
 </section>
 
+<hr/>
 
 <section id="createProject">
     @using (Html.BeginForm())

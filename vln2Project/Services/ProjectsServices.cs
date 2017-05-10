@@ -79,11 +79,16 @@ namespace h37.Services
             return p;
         }
 
-        public IEnumerable<ProjectViewModels> getProjectsForUser(string userID)
+        public IEnumerable<ProjectViewModel> getProjectsForUser(string userID)
         {
-            IEnumerable<ProjectViewModels> p = (from x in db.Projects
-                                                //where x.projectOwnerID.Equals(userID)
-                                                select new ProjectViewModels()).ToList();
+            IEnumerable<ProjectViewModel> p = (from x in db.Projects
+                                               where x.projectOwnerID.Equals(userID)
+                                               select new ProjectViewModel()
+                                               {
+                                                   projectID = x.projectID,
+                                                   projectName = x.projectName,
+                                                   numberOfFiles = x.numberOfFiles
+                                               }).ToList();
             return p;
         }
 

@@ -17,11 +17,9 @@ namespace h37.Controllers
         private ProjectsServices _service = new ProjectsServices();
 
         [HttpGet]
-        [Route("/User/Index")]
         public ActionResult Index()
         {
-            IEnumerable<ProjectViewModels> projects = _service.getProjectsForUser(User.Identity.GetUserId<string>());
-            return View(projects);
+            return View();
         }
 
         [HttpGet]

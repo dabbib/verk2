@@ -10,19 +10,15 @@ namespace h37.Controllers
 {
     public class UserController : Controller
     {
-        private UserServices _service = new UserServices();
+        private UserServices _uService = new UserServices();
+        private ProjectsServices _pService = new ProjectsServices();
 
         // GET: User
         [Authorize]
-        public ActionResult Index(int? id)
+        public ActionResult Index()
         {
-            if(id == null)
-            {
-                return View();
-            }
-
-            /* Return userID as string from User.Identity */
-            return View(User.Identity.GetUserId<string>());
+            var result = _pService.getProjectsForUser(User.Identity.GetUserId<string>());
+            return View(result);
         }
     }
 }
