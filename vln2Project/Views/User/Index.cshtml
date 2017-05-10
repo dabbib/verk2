@@ -3,19 +3,23 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Welcome user...</h2>
+
 <section id="projectList">
+    <h2>Your projects</h2>
     <div class="row">
         @foreach (var item in Model)
         {
             <div class="col-xs-4 project table-bordered">
                 <h2>Name: @Html.DisplayFor(x => item.projectName)</h2>
                 <p>Number of files: @Html.DisplayFor(x => item.numberOfFiles)</p>
-                @Html.ActionLink("Edit", "Edit", new { projectID = item.projectID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Edit", "Edit", "Project", new { projectID = item.projectID }, new { @class = "btn btn-primary" })
             </div>
         }
 
     </div>
+    <hr/>
+    <h2>Projects shared with you</h2>
+    <p>Ooops in progress</p>
 </section>
 
 <hr/>

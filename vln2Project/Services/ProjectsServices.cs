@@ -246,6 +246,20 @@ namespace h37.Services
             return e;
         }
 
+        /// <summary>
+        /// This function returns a list of events associated with a given project
+        /// </summary>
+        /// <param name="projectID"></param>
+        /// <returns></returns>
+        public List<Event> getEventLogForProject(int projectID)
+        {
+            List<Event> e = (from x in db.Events
+                             join f in db.Files on x.fileID equals f.fileID
+                             where f.projectID.Equals(projectID)
+                             select x).ToList();
+            return e;
+        }
+
         #endregion
 
         #region Helper functions

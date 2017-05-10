@@ -22,6 +22,10 @@ namespace h37.Controllers
             return View();
         }
 
+        /// <summary>
+        /// To get create project view
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult CreateProject()
         {
@@ -29,10 +33,15 @@ namespace h37.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// To post information about created project
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult CreateProject(ProjectCreateViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _service.createProject(model.projectName, User.Identity.GetUserId<string>(), model.projectType);
                 return RedirectToAction("Index");
@@ -40,10 +49,26 @@ namespace h37.Controllers
             return View(model);
         }
 
-        public ActionResult Edit()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route ("/Edit/projectID:int")]
+        public ActionResult Edit(int projectID)
         {
-            return View();
+            var p = _service.getProjectByID(projectID);
+            var e = _service.getEventLogForProject(projectID);
+            var f = _service.getFiles(projectID);
+            var x = new ProjectEditViewModel() { projectID = p.projectID, projectName = p.projectName, numberOfFiles = p.numberOfFiles, eventList = e, fileList = f };
+            return View(x);
         }
+
+
+
+
+
+
 
         public ActionResult projectName (int projectID)
         {

@@ -13,7 +13,11 @@ namespace h37.Controllers
         private UserServices _uService = new UserServices();
         private ProjectsServices _pService = new ProjectsServices();
 
-        // GET: User
+        /// <summary>
+        /// Returns list of projects for the user logged in.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         [Authorize]
         public ActionResult Index()
         {
