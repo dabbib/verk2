@@ -20,8 +20,8 @@ h2 {
     position: fixed;
     top: 0;
     bottom: 0;
-    left: 95%;
-    right: 0;
+    left: 90%;
+    right: 0%;
     z-index: -1;
 }
 
@@ -31,18 +31,11 @@ h2 {
     top: 0;
     bottom: 0;
     left: 0;
-    right: 95%;
+    right: 90%;
     z-index: -1;
 }
 
 #bg-bottom {
-    background-color: lightblue;
-    position: fixed;
-    top: 95%;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: -1;
 }
 
 
@@ -122,8 +115,8 @@ ul {
 
 .col-xs-4 {
     position: relative;
-    min-height: 1px;
-    width: 33.33333333333333%;
+    min-height: 1px;;
+    width: 100%;
     float: left;
     border-color: red;
 }
@@ -134,5 +127,18 @@ ul {
     line-height: 6.7;
     background-color: white;
     color: blue;
-    border-color: red;
+    border-color: red
+    
+}
+
+.editor-right {
+    width: 70%;
+    height: 100%;
+    float: right;
+}
+
+.editor-left {
+    float: left;
+    width: 27.5%;
+    height: 100%;
 }
