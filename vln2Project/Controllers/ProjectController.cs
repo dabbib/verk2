@@ -43,8 +43,8 @@ namespace h37.Controllers
         {
             if (ModelState.IsValid)
             {
-                _service.createProject(model.projectName, User.Identity.GetUserId<string>(), model.projectType);
-                return RedirectToAction("Index");
+                var r = _service.createProject(model.projectName, User.Identity.GetUserId<string>(), model.projectType);
+                return RedirectToAction("Edit", new { projectID = r });
             }
             return View(model);
         }
@@ -62,6 +62,26 @@ namespace h37.Controllers
             var f = _service.getFiles(projectID);
             var x = new ProjectEditViewModel() { projectID = p.projectID, projectName = p.projectName, numberOfFiles = p.numberOfFiles, eventList = e, fileList = f };
             return View(x);
+        }
+
+        [HttpGet]
+        public ActionResult CreateFile()
+        {
+            FileCreateViewModel model = new FileCreateViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult CreateFile(FileCreateViewModel model)
+        {
+            //model.projectID = projectID;
+            model.userID = User.Identity.GetUserId<string>();
+            if (ModelState.IsValid)
+            {
+                _service.createFile(model.projectID, model.userID, model.fileName);
+                return RedirectToAction("Edit", new { projectID = model.projectID });
+            }
+            return null;
         }
 
 
