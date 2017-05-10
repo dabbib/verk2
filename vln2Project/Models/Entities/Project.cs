@@ -6,8 +6,12 @@ using System.Web;
 namespace h37.Models.Entities
 {
     public class Project
-    {
-        public Project(string projectName, int projectOwnerID, projectType type)
+    {        
+        public Project()
+        {
+
+        }
+        public Project(string projectName, string projectOwnerID, projectType type)
         {
             this.projectName = projectName;
             this.projectOwnerID = projectOwnerID;
@@ -18,7 +22,7 @@ namespace h37.Models.Entities
 
         public int projectID { get; set;}
         public string projectName { get; set; }
-        public int projectOwnerID { get; set; }
+        public string projectOwnerID { get; set; }
         public int numberOfFiles { get; set; }
         public projectType type { get; set; }
     }
