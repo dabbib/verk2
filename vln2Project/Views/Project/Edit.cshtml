@@ -10,7 +10,7 @@
         @foreach (var item in Model.fileList)
         {
             <div class="col-xs-4 project table-bordered">
-                <h2>Name: @Html.DisplayFor(x => item.fileName)</h2>
+                <h3>Name: @Html.DisplayFor(x => item.fileName)</h3>
                 @Html.ActionLink("Edit", "EditFile", "Project", new { fileID = item.fileID }, new { @class = "btn btn-primary" })
             </div>
         }

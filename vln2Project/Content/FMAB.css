@@ -1,6 +1,10 @@
 ﻿body {
 }
 
+h2 {
+    text-decoration: underline;
+}
+
 #welcome {
     padding-top: 0.5em;
     padding-bottom: 0.2em;
@@ -66,13 +70,17 @@ ul {
     margin-top: 5px;
     margin-left: 5px;
     margin-right: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     border-style: solid;
     border-color: dodgerblue;
     float: left;
     padding: 15px 15px;
     font-size: 18px;
     line-height: 20px;
+}
+
+#top-row-btn {
+    margin-bottom: 0px;
 }
 
 .big-success-btn {
@@ -101,6 +109,7 @@ ul {
 .navbar-inverse {
     background-color: lightblue;
     border-color: lightblue;
+    margin-bottom: 0px;
 }
 
 .navbar-fixed-top,
@@ -111,18 +120,19 @@ ul {
     border-width: 0 0 1px;
 }
 
-#foo {
-    position: absolute;
-    top: 25%;
-    left: 40%;
+.col-xs-4 {
+    position: relative;
+    min-height: 1px;
+    width: 33.33333333333333%;
+    float: left;
+    border-color: red;
 }
 
-#output {
-    position : fixed;
-    top      : 0;
-    right    : 0;
-    height   : 200px;
-    width    : 200px;
-    border   : 1px solid yellow;
-    overflow : hidden;
+#foo {
+    margin: auto;
+    text-align: center;
+    line-height: 6.7;
+    background-color: white;
+    color: blue;
+    border-color: red;
 }

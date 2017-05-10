@@ -5,16 +5,25 @@
 
 
 <section id="projectList">
-    <h2>Your projects</h2>
+    <h2>My projects</h2>
     <div class="row">
         @foreach (var item in Model)
         {
             <div class="col-xs-4 project table-bordered">
-                <h2>Name: @Html.DisplayFor(x => item.projectName)</h2>
+                <h3>Name: @Html.DisplayFor(x => item.projectName)</h3>
                 <p>Number of files: @Html.DisplayFor(x => item.numberOfFiles)</p>
                 @Html.ActionLink("Edit", "Edit", "Project", new { projectID = item.projectID }, new { @class = "btn btn-primary" })
             </div>
         }
+
+        <div class="">
+            @using (Html.BeginForm())
+            {
+                @Html.ActionLink("Create Project", "CreateProject", "Project", new { area = "" }, new { @class = "btn btn-primary col-xs-4 project table-bordered", @id = "foo" })
+            }
+        </div>
+
+
 
     </div>
     <hr/>
