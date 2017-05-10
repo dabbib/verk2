@@ -2,6 +2,7 @@
 using h37.Models.Entities;
 using h37.Models.ViewModels;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -17,7 +18,9 @@ namespace h37.Services
         public ProjectsServices()
         {
             db = new ApplicationDbContext();
+
         }
+        
 
         #region Project functions
 
@@ -148,6 +151,14 @@ namespace h37.Services
         /// <returns>ID of the file created</returns>
         public int createFile(int projectID, string userID, string fileName)
         {
+            var f = (from x in db.Files
+                     where x.fileName.Equals(fileName) & x.projectID.Equals(projectID)
+                     select x).SingleOrDefault();
+            if(f != null)
+            {
+                throw new ArgumentException("This file name is already taken");
+            }
+            
             File newFile = new File(fileName, getProjectType(projectID).ToString(), projectID);
             incrementProjectFileCounter(projectID);
 
@@ -252,12 +263,19 @@ namespace h37.Services
         /// </summary>
         /// <param name="projectID"></param>
         /// <returns></returns>
-        public List<Event> getEventLogForProject(int projectID)
+        public List<EventLogViewModel> getEventLogForProject(int projectID)
         {
-            List<Event> e = (from x in db.Events
-                             join f in db.Files on x.fileID equals f.fileID
-                             where f.projectID.Equals(projectID)
-                             select x).ToList();
+            List<EventLogViewModel> e = (from x in db.Events
+                                         join f in db.Files on x.fileID equals f.fileID
+                                         join u in db.Users on x.userID equals u.Id
+                                         where f.projectID.Equals(projectID)
+                                         select new EventLogViewModel()
+                                         {
+                                             timestamp = x.timestamp,
+                                             userName = u.UserName,
+                                             type = x.type,
+                                             fileName = f.fileName
+                                         }).ToList();
             return e;
         }
 
