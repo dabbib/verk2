@@ -1,9 +1,23 @@
-﻿
+﻿@model h37.Models.ViewModels.ProjectEditViewModel
 @{
     ViewBag.Title = "Edit";
 }
 
 <h2>Edit</h2>
+<section id="fileList">
+    <h2>Your projects</h2>
+    <div class="row">
+        @foreach (var item in Model.fileList)
+        {
+            <div class="col-xs-4 project table-bordered">
+                <h2>Name: @Html.DisplayFor(x => item.fileName)</h2>
+                @Html.ActionLink("Edit", "EditFile", "Project", new { fileID = item.fileID }, new { @class = "btn btn-primary" })
+            </div>
+        }
+
+    </div>
+</section>
+
 
 <!--This is the div for the ace editor-->
 <div id="editor">

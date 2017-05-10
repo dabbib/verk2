@@ -8,6 +8,10 @@ namespace h37.Models.Entities
 {
     public class Event
     {
+        public Event()
+        {
+
+        }
         public Event(string userID, int fileID, DateTime timestamp, eventType type)
         {
             this.userID = userID;

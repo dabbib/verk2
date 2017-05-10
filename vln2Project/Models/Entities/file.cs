@@ -7,6 +7,11 @@ namespace h37.Models.Entities
 {
     public class File
     {
+        public File()
+        {
+
+        }
+
         public File(string fileName, string fileType, int projectID)
         {
             this.fileName = fileName;
