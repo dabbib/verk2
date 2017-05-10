@@ -49,6 +49,13 @@ namespace h37.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult DeleteProject(int projectID)
+        {
+            _service.deleteProject(projectID);
+            return RedirectToAction("Index");
+        }
+
         /// <summary>
         /// 
         /// </summary>

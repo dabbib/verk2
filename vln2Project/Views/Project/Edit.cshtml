@@ -58,3 +58,38 @@
         editor.getSession().setMode("ace/mode/javascript");
     </script>
 }
+
+<section id="eventLog">
+    <h2>Event log</h2>
+    <div class="row">
+        <div class="col-xs-3">
+            Timestamp
+        </div>
+        <div class="col-xs-3">
+            FileID
+        </div>
+        <div class="col-xs-3">
+            UserID
+        </div>
+        <div class="col-xs-3">
+            Type
+        </div>
+    </div>
+    @foreach (var item in Model.eventList)
+    {
+        <div class="row">
+            <div class="col-xs-3">
+                @Html.DisplayFor(x => item.timestamp)
+            </div>
+            <div class="col-xs-3">
+                @Html.DisplayFor(x => item.fileID)
+            </div>
+            <div class="col-xs-3">
+                @Html.DisplayFor(x => item.userID)
+            </div>
+            <div class="col-xs-3">
+                @Html.DisplayFor(x => item.type)
+            </div>
+        </div>
+    }
+</section>
