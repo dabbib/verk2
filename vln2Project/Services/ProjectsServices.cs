@@ -28,7 +28,7 @@ namespace h37.Services
         /// <param name="userID">ID of the user creating the project</param>
         /// <param name="type">Type of project provided by user</param>
         /// <returns>Id of the created project</returns>
-        public void createProject(string projectName, string userID, projectType type)
+        public int createProject(string projectName, string userID, projectType type)
         {
             Project newProject = new Project(projectName, userID, type);
 
@@ -58,6 +58,7 @@ namespace h37.Services
 
             /* Create the index file for the new project */
             createFile(newProject.projectID, userID, "index." + type);
+            return newProject.projectID;
 
         }
 
