@@ -27,6 +27,6 @@
 <section id="createProject">
     @using (Html.BeginForm())
     {
-        @Html.ActionLink("Create Project", "CreateProject", "Project")
+        @Html.ActionLink("Create Project", "CreateProject", "Project", new { area = "" }, new { @class = "btn btn-primary" })
     }
 </section>
