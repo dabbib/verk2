@@ -6,7 +6,7 @@
 <section id="createProject">
     @using (Html.BeginForm())
     {
-        <h4>Fill in information about the project</h4>
+        <h3 id="information">Fill in information about the project</h3>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(m => m.projectName, "", new { @class = "col-md-2 control-label" })

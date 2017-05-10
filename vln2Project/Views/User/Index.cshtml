@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Welcome user...</h2>
+<h2 id="welcome">Welcome user...</h2>
 <section id="projectList">
     <div class="row">
         @foreach (var item in Model)
@@ -23,6 +23,6 @@
 <section id="createProject">
     @using (Html.BeginForm())
     {
-        @Html.ActionLink("Create Project", "CreateProject", "Project")
+        @Html.ActionLink("Create Project", "CreateProject", "Project", new { area = "" }, new { @class = "btn btn-primary" })
     }
 </section>
