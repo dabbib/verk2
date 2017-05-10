@@ -19,10 +19,11 @@
                 <h4>Create new File</h4>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(m => m.createFile.fileName, "", new { id = "fileName", @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.createFile.fileName, "", new { @class = "col-md-2 control-label"})
                     <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.createFile.fileName, new { @class = "form-control", @placeholder = "FILE NAME" })
-                        @Html.ValidationMessageFor(m => m.createFile.fileName, "", new { @class = "text-danger" })
+                        <input class="form-control" id="fileName" name="fileName" placeholder="FILE NAME" type="text" value="">
+                        @*Html.TextBoxFor(m => m.createFile.fileName, new { @class = "form-control", @placeholder = "FILE NAME", @name = "fileName"})*@
+                        @Html.ValidationMessageFor(m => m.createFile.fileName, "", new { @class = "text-danger"})
                     </div>
                 </div>
                 <div class="form-group">
