@@ -9,7 +9,10 @@ namespace h37.Models.ViewModels
     {
         public string projectName { get; set; }
 
-        public List<ProjectViewModel> fileList { get; set; }
+        /// <summary>
+        /// SKOÐA!!!!!!!!!!!!!!!!!!!!!!!!!
+        /// </summary>
+        public List<ProjectViewModels> fileList { get; set; }
 
         public string projectType { get; set; }
     }

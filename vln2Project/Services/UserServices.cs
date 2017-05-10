@@ -16,15 +16,6 @@ namespace h37.Services
         {
             db = new ApplicationDbContext();
         }
-        
-        public User getUserByID(int userID)
-        {
-            return null;
-        }
-        public User getUserByName(string userName)
-        {
-            return null;
-        }
         public List<Project> getProjects(int userID)
         {
             /* return list of  projects */

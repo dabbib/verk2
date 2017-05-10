@@ -3,7 +3,7 @@ namespace h37.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class userName : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -11,7 +11,7 @@ namespace h37.Migrations
                 "dbo.Events",
                 c => new
                     {
-                        userID = c.Int(nullable: false, identity: true),
+                        userID = c.String(nullable: false, maxLength: 128),
                         timestamp = c.DateTime(nullable: false),
                         type = c.Int(nullable: false),
                         fileID = c.Int(nullable: false),
@@ -26,6 +26,7 @@ namespace h37.Migrations
                         fileName = c.String(),
                         fileType = c.String(),
                         projectID = c.Int(nullable: false),
+                        content = c.String(),
                     })
                 .PrimaryKey(t => t.fileID);
             
@@ -35,7 +36,7 @@ namespace h37.Migrations
                     {
                         projectID = c.Int(nullable: false, identity: true),
                         projectName = c.String(),
-                        projectOwnerID = c.Int(nullable: false),
+                        projectOwnerID = c.String(),
                         numberOfFiles = c.Int(nullable: false),
                         type = c.Int(nullable: false),
                     })
@@ -65,21 +66,10 @@ namespace h37.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.usersInProjects",
-                c => new
-                    {
-                        id = c.Int(nullable: false, identity: true),
-                        userID = c.String(),
-                        projectID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.id);
-            
-            CreateTable(
                 "dbo.AspNetUsers",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        userName = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -120,6 +110,16 @@ namespace h37.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
+            CreateTable(
+                "dbo.usersInProjects",
+                c => new
+                    {
+                        id = c.Int(nullable: false, identity: true),
+                        userID = c.String(),
+                        projectID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.id);
+            
         }
         
         public override void Down()
@@ -134,10 +134,10 @@ namespace h37.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropTable("dbo.usersInProjects");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.usersInProjects");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Projects");

@@ -1,4 +1,5 @@
 ﻿using h37.Services;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,8 @@ namespace h37.Controllers
                 return View();
             }
 
-            var UserViewModelID = _service.getUserByID(id.Value);
-
-            return View(UserViewModelID);
+            /* Return userID as string from User.Identity */
+            return View(User.Identity.GetUserId<string>());
         }
     }
 }

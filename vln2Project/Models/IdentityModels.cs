@@ -21,18 +21,16 @@ namespace h37.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Project> Projects { get; set; }
-        public DbSet<File> Files { get; set; }
-        public DbSet<usersInProjects> SystemUsers { get; set; }
-        //public DbSet<User> UsersInfo { get; set; }
-        public DbSet<Event> Events { get; set; }
-
-        /* Todo map all entity classes */
-
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+
+        /* This code maps the entity classes */
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<File> Files { get; set; }
+        public DbSet<usersInProjects> UsersInProjects { get; set; }
+        public DbSet<Event> Events { get; set; }
 
         public static ApplicationDbContext Create()
         {

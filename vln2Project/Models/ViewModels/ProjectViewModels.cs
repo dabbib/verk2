@@ -5,10 +5,11 @@ using System.Web;
 
 namespace h37.Models.ViewModels
 {
-    public class ProjectViewModel
+    public class ProjectViewModels
     {
-        public string projectName { get; set; }
 
+        public int projectID { get; set; }
+        public string projectName { get; set; }
         public int numberOfFiles { get; set; }
 
     }

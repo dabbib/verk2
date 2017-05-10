@@ -1,7 +1,10 @@
 ﻿using h37.Models;
 using h37.Models.Entities;
+using h37.Models.ViewModels;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using static h37.Models.Entities.Project;
 
@@ -21,21 +24,41 @@ namespace h37.Services
         /// <summary>
         /// This function creates a new project with one file called index.js for js projects.
         /// </summary>
-        /// <param name="userID">ID of the user creating the project</param>
         /// <param name="projectName">Name of the project provided by user</param>
+        /// <param name="userID">ID of the user creating the project</param>
         /// <param name="type">Type of project provided by user</param>
         /// <returns>Id of the created project</returns>
-        public int createProject(int userID, string projectName, projectType type)
+        public void createProject(string projectName, string userID, projectType type)
         {
             Project newProject = new Project(projectName, userID, type);
+
+            try
+            {
+                db.Projects.Add(newProject);
+                db.SaveChanges();
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting
+                        // the current instance as InnerException
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
+
 
             /* Create the index file for the new project */
             createFile(newProject.projectID, userID, "index." + type);
 
-            db.Projects.Add(newProject);
-            db.SaveChanges();
-
-            return newProject.projectID;
         }
 
         /// <summary>
@@ -53,6 +76,14 @@ namespace h37.Services
             {
                 /* Todo exceptions if project does not exist */
             }
+            return p;
+        }
+
+        public IEnumerable<ProjectViewModels> getProjectsForUser(string userID)
+        {
+            IEnumerable<ProjectViewModels> p = (from x in db.Projects
+                                                //where x.projectOwnerID.Equals(userID)
+                                                select new ProjectViewModels()).ToList();
             return p;
         }
 
@@ -109,14 +140,16 @@ namespace h37.Services
         /// <param name="userID"></param>
         /// <param name="fileName"></param>
         /// <returns>ID of the file created</returns>
-        public int createFile(int projectID, int userID, string fileName)
+        public int createFile(int projectID, string userID, string fileName)
         {
             File newFile = new File(fileName, getProjectType(projectID).ToString(), projectID);
-            Event newEvent = new Event(userID, newFile.fileID, DateTime.Now, Event.eventType.created);
-
             incrementProjectFileCounter(projectID);
 
             db.Files.Add(newFile);
+            db.SaveChanges();
+
+            Event newEvent = new Event(userID, newFile.fileID, DateTime.Now, Event.eventType.created);
+
             db.Events.Add(newEvent);
             db.SaveChanges();
 
@@ -186,7 +219,7 @@ namespace h37.Services
         /// </summary>
         /// <param name="userID">ID of the user that made changes</param>
         /// <param name="fileID">ID of the file beeing changed</param>
-        public void logEvent(int userID, int fileID)
+        public void logEvent(string userID, int fileID)
         {
             Event e = new Event(userID, fileID, DateTime.Now, Event.eventType.modified);
 
