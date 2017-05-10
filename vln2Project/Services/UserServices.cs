@@ -16,11 +16,7 @@ namespace h37.Services
         {
             db = new ApplicationDbContext();
         }
-        public List<Project> getProjects(int userID)
-        {
-            /* return list of  projects */
-            return null;
-        }
+
         public void subscribeUser(int projectID, string userName)
         {
             /* Todo */

@@ -19,7 +19,7 @@ namespace h37.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "User");
         }
 
         /// <summary>
@@ -43,17 +43,24 @@ namespace h37.Controllers
         {
             if (ModelState.IsValid)
             {
-                var r = _service.createProject(model.projectName, User.Identity.GetUserId<string>(), model.projectType);
-                return RedirectToAction("Edit", new { projectID = r });
+                try
+                {
+                    var r = _service.createProject(model.projectName, User.Identity.GetUserId<string>(), model.projectType);
+                    return RedirectToAction("Edit", new { projectID = r });
+
+                }
+                catch (ArgumentException e)
+                {
+                    return new HttpStatusCodeResult(403, e.Message);
+                }
             }
             return View(model);
         }
 
-        [HttpPost]
         public ActionResult DeleteProject(int projectID)
         {
             _service.deleteProject(projectID);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "User");
         }
 
         /// <summary>
@@ -85,32 +92,25 @@ namespace h37.Controllers
             model.userID = User.Identity.GetUserId<string>();
             if (ModelState.IsValid)
             {
-                _service.createFile(model.projectID, model.userID, model.fileName);
+                try
+                {
+                    _service.createFile(model.projectID, model.userID, model.fileName);
+                }
+                catch (ArgumentException e)
+                {
+                    return new HttpStatusCodeResult(403, e.Message);
+                }
                 return RedirectToAction("Edit", new { projectID = model.projectID });
             }
             return null;
         }
 
-
-
-
-
-
-
-        public ActionResult projectName (int projectID)
+        public ActionResult DeleteFile(int fileID)
         {
-            var ProjectViewModelName = _service.getProjectByID(projectID);
-
-            return View(ProjectViewModelName);
-
+            var f = _service.getFileByID(fileID);
+            _service.deleteFile(fileID);
+            return RedirectToAction("Edit", new { projectID = f.projectID });
         }
 
-        public ActionResult numberOfFiles(int projectID)
-        {
-            var ProjectViewModelFiles = _service.getNumberOfFilesInProject(projectID);
-
-            return View(ProjectViewModelFiles);
-
-        }
     }
 }

@@ -11,6 +11,7 @@
             <div class="col-xs-4 project table-bordered">
                 <h3>Name: @Html.DisplayFor(x => item.fileName)</h3>
                 @Html.ActionLink("Edit", "EditFile", "Project", new { fileID = item.fileID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Delete", "DeleteFile", "Project", new { fileID = item.fileID }, new { @class = "btn btn-danger" })
             </div>
         }
         <div class="col-xs-4 project table-bordered">
@@ -22,7 +23,6 @@
                     @Html.LabelFor(m => m.createFile.fileName, "", new { @class = "col-md-2 control-label"})
                     <div class="col-md-10">
                         <input class="form-control" id="fileName" name="fileName" placeholder="FILE NAME" type="text" value="">
-                        @*Html.TextBoxFor(m => m.createFile.fileName, new { @class = "form-control", @placeholder = "FILE NAME", @name = "fileName"})*@
                         @Html.ValidationMessageFor(m => m.createFile.fileName, "", new { @class = "text-danger"})
                     </div>
                 </div>
@@ -63,16 +63,16 @@
     <h2>Event log</h2>
     <div class="row">
         <div class="col-xs-3">
-            Timestamp
+            Time
         </div>
         <div class="col-xs-3">
-            FileID
-        </div>
-        <div class="col-xs-3">
-            UserID
+            User
         </div>
         <div class="col-xs-3">
             Type
+        </div>
+        <div class="col-xs-3">
+            File
         </div>
     </div>
     @foreach (var item in Model.eventList)
@@ -82,13 +82,13 @@
                 @Html.DisplayFor(x => item.timestamp)
             </div>
             <div class="col-xs-3">
-                @Html.DisplayFor(x => item.fileID)
-            </div>
-            <div class="col-xs-3">
-                @Html.DisplayFor(x => item.userID)
+                @Html.DisplayFor(x => item.userName)
             </div>
             <div class="col-xs-3">
                 @Html.DisplayFor(x => item.type)
+            </div>
+            <div class="col-xs-3">
+                @Html.DisplayFor(x => item.fileName)
             </div>
         </div>
     }

@@ -12,7 +12,7 @@ namespace h37.Models.ViewModels
         public string projectName { get; set; }
         public int numberOfFiles { get; set; }
         public List<File> fileList { get; set; }
-        public List<Event> eventList { get; set; }
+        public List<EventLogViewModel> eventList { get; set; }
         public FileCreateViewModel createFile { get; set; }
 
     }
