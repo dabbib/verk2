@@ -13,6 +13,7 @@
                 <p>Number of files: @Html.DisplayFor(x => item.numberOfFiles)</p>
                 @Html.ActionLink("Edit", "Edit", "Project", new { projectID = item.projectID }, new { @class = "btn btn-primary" })
                 @Html.ActionLink("Delete", "DeleteProject", "Project", new { projectID = item.projectID }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Configure", "ConfigureProject", "Project", new { projectID = item.projectID}, new { @class = "btn btn-success"})
             </div>
         }
 
