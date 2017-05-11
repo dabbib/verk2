@@ -50,9 +50,9 @@
 <h3 id="haus3" class="editor-right">@Html.ViewBag.fileName</h3>
 @using (Html.BeginForm("SaveFile", "Project", FormMethod.Post))
 {
-    @Html.HiddenFor(m => m.fileSave.content, new { @id = "hidden_editor" })
-    @Html.HiddenFor(m => m.fileSave.projectID, new { projectID = Model.projectID })
-    @Html.HiddenFor(m => m.fileSave.fileID, new { fileID = Request.Params["fileID"] })
+    <input id="content" name="content" type="hidden" value="">
+    <input data-val="true" data-val-number="The field projectID must be a number." data-val-required="The projectID field is required." id="projectID" name="projectID" projectID=@Model.projectID type="hidden" value=@Model.projectID>
+    <input data-val="true" data-val-number="The field fileID must be a number." data-val-required="The fileID field is required." id="fileID" name="fileID" fileID=@Request.Params["fileID"] type="hidden" value=@Request.Params["fileID"]>
     <input type="submit" value="Save" class="btn btn-success button-size-4" />
 }
 <!--This is the div for the ace editor-->
