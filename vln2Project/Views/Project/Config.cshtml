@@ -23,9 +23,13 @@
                     });
                 }
             }
-            @Html.DropDownList("yourDropName",listItems, "Select User", new { @class = "form-control" })
+            @using (Html.BeginForm("SubscribeUser", "User", FormMethod.Post))
+            {
+                @Html.DropDownList("yourDropName", listItems, "Select User", new { @class = "form-control" })
+                <input type="submit" value="Save changes" class="btn btn-success" />
+            }
         </div>
-        <input type="submit" value="Save changes" class="btn btn-success" />
+        
     </div>
 </section>
 
