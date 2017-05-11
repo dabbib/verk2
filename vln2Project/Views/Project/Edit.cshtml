@@ -3,48 +3,67 @@
     ViewBag.Title = "Edit";
 }
 
-<h2 id="haus2">Project Name: @Html.DisplayFor(x => Model.projectName)</h2>
-<section id="fileList" class="editor-left">
-    <div class="row">
-        <h3 id="haus2">Files</h3>
-        <hr />
-        @foreach (var item in Model.fileList)
-        {
-            <div class="col-xs-12 project table-bordered">
-                <h4 class="to-left">Name: @Html.DisplayFor(x => item.fileName)</h4>
-                <div class="to-right">
-                    @Html.ActionLink("Edit", "EditFile", "Project", new { projectID = item.projectID, fileID = item.fileID }, new { @class = "btn btn-primary button-size-1" })
-                    @Html.ActionLink("Delete", "DeleteFile", "Project", new { fileID = item.fileID }, new { @class = "btn btn-danger button-size-1" })
-                </div>
-            </div>
-        }
-        <div class="col-xs-12 project table-bordered">
-            @using (Html.BeginForm("CreateFile", "Project"))
+<head>
+    <script type="text/javascript">
+        function load() {
+            var selectedID = '@ViewBag.fileName';
+            if(selectedID == "Please open file to edit")
             {
-                <h4>Create new File</h4>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.createFile.fileName, "", new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        <input class="form-control left-float-input" id="fileName" name="fileName" placeholder="FILE NAME" type="text" value="">
-                        @Html.ValidationMessageFor(m => m.createFile.fileName, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.HiddenFor(m => m.projectID, new { projectID = Model.projectID })
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-success button-size-3" />
+                document.getElementById("sav-btn").disabled = true;
+            }
+            else
+            {
+                document.getElementById("sav-btn").disabled = false;
+            }
+        };
+    </script>
+</head>
+
+
+
+<body onload="load()">
+    <h2 id="haus2">Project Name: @Html.DisplayFor(x => Model.projectName)</h2>
+    <section id="fileList" class="editor-left">
+        <div class="row">
+            <h3 id="haus2">Files</h3>
+            <hr />
+            @foreach (var item in Model.fileList)
+            {
+                <div class="col-xs-12 project table-bordered">
+                    <h4 class="to-left">Name: @Html.DisplayFor(x => item.fileName)</h4>
+                    <div class="to-right">
+                        @Html.ActionLink("Edit", "EditFile", "Project", new { projectID = item.projectID, fileID = item.fileID }, new { @class = "btn btn-primary button-size-1" })
+                        @Html.ActionLink("Delete", "DeleteFile", "Project", new { fileID = item.fileID }, new { @class = "btn btn-danger button-size-1" })
                     </div>
                 </div>
             }
+            <div class="col-xs-12 project table-bordered">
+                @using (Html.BeginForm("CreateFile", "Project"))
+            {
+                    <h4>Create new File</h4>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.createFile.fileName, "", new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            <input class="form-control left-float-input" id="fileName" name="fileName" placeholder="FILE NAME" type="text" value="">
+                            @Html.ValidationMessageFor(m => m.createFile.fileName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(m => m.projectID, new { projectID = Model.projectID })
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-success button-size-3" />
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<div class="border-carrier">
-</div>
+    <div class="border-carrier">
+    </div>
 
 
 <h3 id="haus3" class="editor-right">@Html.ViewBag.fileName</h3>
@@ -53,7 +72,7 @@
     <input id="content" name="content" type="hidden" value="">
     <input data-val="true" data-val-number="The field projectID must be a number." data-val-required="The projectID field is required." id="projectID" name="projectID" projectID=@Model.projectID type="hidden" value=@Model.projectID>
     <input data-val="true" data-val-number="The field fileID must be a number." data-val-required="The fileID field is required." id="fileID" name="fileID" fileID=@Request.Params["fileID"] type="hidden" value=@Request.Params["fileID"]>
-    <input type="submit" value="Save" class="btn btn-success button-size-4" />
+    <input type="submit" value="Save" class="btn btn-success button-size-4" id="sav-btn" />
 }
 <!--This is the div for the ace editor-->
 <div class="editor-right">
@@ -63,54 +82,55 @@
     </div>
 </div>
 
-<!--This is a script for the ace editor-->
-@section scripts
+    <!--This is a script for the ace editor-->
+    @section scripts
 {
-    <script src="~/3rdParty/src/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script>
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/monokai");
-        editor.getSession().setMode("ace/mode/javascript");
-        $("form").submit(function () {
-            $("#content").val(editor.getSession().getValue());
-        });
-    </script>
-}
+        <script src="~/3rdParty/src/ace.js" type="text/javascript" charset="utf-8"></script>
+        <script>
+            var editor = ace.edit("editor");
+            editor.setTheme("ace/theme/monokai");
+            editor.getSession().setMode("ace/mode/javascript");
+            $("form").submit(function () {
+                $("#content").val(editor.getSession().getValue());
+            });
+        </script>
+    }
 
-<div class="editor-right">
-    <section id="eventLog">
-        <h2>Event log</h2>
-        <div class="row">
-            <div class="col-xs-3">
-                Time
-            </div>
-            <div class="col-xs-3">
-                User
-            </div>
-            <div class="col-xs-3">
-                Type
-            </div>
-            <div class="col-xs-3">
-                File
-            </div>
-            <hr class="event-table" />
-        </div>
-        @foreach (var item in Model.eventList)
-        {
+    <div class="editor-right">
+        <section id="eventLog">
+            <h2>Event log</h2>
             <div class="row">
                 <div class="col-xs-3">
-                    @Html.DisplayFor(x => item.timestamp)
+                    Time
                 </div>
                 <div class="col-xs-3">
-                    @Html.DisplayFor(x => item.userName)
+                    User
                 </div>
                 <div class="col-xs-3">
-                    @Html.DisplayFor(x => item.type)
+                    Type
                 </div>
                 <div class="col-xs-3">
-                    @Html.DisplayFor(x => item.fileName)
+                    File
                 </div>
+                <hr class="event-table" />
             </div>
-        }
-    </section>
-</div>
+            @foreach (var item in Model.eventList)
+            {
+                <div class="row">
+                    <div class="col-xs-3">
+                        @Html.DisplayFor(x => item.timestamp)
+                    </div>
+                    <div class="col-xs-3">
+                        @Html.DisplayFor(x => item.userName)
+                    </div>
+                    <div class="col-xs-3">
+                        @Html.DisplayFor(x => item.type)
+                    </div>
+                    <div class="col-xs-3">
+                        @Html.DisplayFor(x => item.fileName)
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+</body>

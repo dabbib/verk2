@@ -20,12 +20,12 @@
             <section id="createProject">
                 @using (Html.BeginForm("CreateProject", "Project", FormMethod.Post))
                 {
-                    <h3 id="information">Create project</h3>
+                    <h3 id="information haus3">Create project</h3>
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
                         @Html.LabelFor(m => m.createProject.projectName, "", new { @class = "col-md-2 control-label" })
                         <div class="col-md-10">
-                            <input class="form-control" id="projectName" name="projectName" placeholder="PROJECT NAME" type="text">
+                            <input class="form-control left-float-input" id="projectName" name="projectName" placeholder="PROJECT NAME" type="text">
                             @Html.ValidationMessageFor(m => m.createProject.projectName, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Create" class="btn btn-success" />
+                            <input type="submit" value="Create" class="btn btn-success button-size-5" />
                         </div>
                     </div>
                 }

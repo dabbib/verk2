@@ -1,8 +1,10 @@
-﻿var $output = $('#output');
-$(window).on('scroll', function () {
-    var scrollTop = $(window).scrollTop(),
-        elementOffset = $('#foo').offset().top,
-        distance = (elementOffset - scrollTop);
-
-    $output.prepend('<p>' + distance + '</p>');
-});
+﻿function load() {
+    if(selectedID == "Please open file to edit")
+    {
+        document.getElementById("sav-btn").disabled = true;
+    }
+    else
+    {
+        document.getElementById("sav-btn").disabled = false;
+    }
+};
