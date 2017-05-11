@@ -15,12 +15,22 @@
 
                 foreach (var item in Model.userList)
                 {
-
-                    listItems.Add(new SelectListItem
+                    if (Model.usersInProject.Where(x => x.userID.Equals(item.userID)).FirstOrDefault() != null)
                     {
-                        Text = item.userName,
-                        Value = item.userName
-                    });
+                        @*Do nothing since we dont want that person on our list*@
+                    }
+                    else if (Model.projectOwnerID.Equals(item.userID))
+                    {
+                        @*Do nothing since we dont want that person on our list*@
+                    }
+                    else
+                    {
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = item.userName,
+                            Value = item.userName
+                        });
+                    }
                 }
             }
             @using (Html.BeginForm("SubscribeUser", "User", FormMethod.Post))
