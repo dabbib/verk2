@@ -95,6 +95,7 @@ namespace h37.Controllers
         {
             Project p = _service.getProjectByID(projectID);
             ProjectConfigViewModel model = new ProjectConfigViewModel();
+            model.projectID = p.projectID;
             model.projectName = p.projectName;
             model.projectOwnerID = p.projectOwnerID;
             model.numberOfFiles = p.numberOfFiles;

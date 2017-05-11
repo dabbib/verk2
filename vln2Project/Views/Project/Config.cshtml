@@ -25,8 +25,9 @@
             }
             @using (Html.BeginForm("SubscribeUser", "User", FormMethod.Post))
             {
-                @Html.DropDownList("yourDropName", listItems, "Select User", new { @class = "form-control" })
-                <input type="submit" value="Save changes" class="btn btn-success" />
+                @Html.DropDownList("userName", listItems, "Select User", new { @class = "form-control" })
+                @Html.HiddenFor(m => m.projectID, new { projectID = Model.projectID })
+                <input type="submit" value="Add user" class="btn btn-success" />
             }
         </div>
         

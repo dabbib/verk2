@@ -8,7 +8,11 @@ namespace h37.Models.Entities
 {
     public class usersInProjects
     {
-        public usersInProjects(string userID, int projcetID)
+        public usersInProjects()
+        {
+
+        }
+        public usersInProjects(string userID, int projectID)
         {
             this.userID = userID;
             this.projectID = projectID;

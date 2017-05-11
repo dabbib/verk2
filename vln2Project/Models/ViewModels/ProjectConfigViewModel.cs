@@ -10,11 +10,13 @@ namespace h37.Models.ViewModels
         {
 
         }
+        public int projectID { get; set; }
         public string projectName { get; set; }
         public string projectOwnerID { get; set; }
         public int numberOfFiles { get; set; }
         public projectType type { get; set; }
         public List<UserViewModel> userList { get; set; }
+        public string selectedUser { get; set; }
         public List<UserViewModel> usersInProject { get; set; }
     }
 }

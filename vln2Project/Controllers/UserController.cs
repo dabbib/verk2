@@ -26,5 +26,21 @@ namespace h37.Controllers
             var model = new ProjectViewModel { projectList = result, createProject = null };
             return View(model);
         }
+
+        [HttpPost]
+        public ActionResult SubscribeUser(string userName, int projectID)
+        {
+            string userID = _uService.getUserByName(userName).Id;
+            try
+            {
+                _uService.subscribeUser(userID, projectID);
+            }
+            catch (ArgumentException e)
+            {
+                return new HttpStatusCodeResult(403, e.Message);
+            }
+            
+            return RedirectToAction("Config", "Project", new { projectID = projectID });
+        }
     }
 }
