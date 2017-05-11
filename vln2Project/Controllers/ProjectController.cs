@@ -125,10 +125,10 @@ namespace h37.Controllers
 
         [HttpPost]
         [Route("~/Project/Edit/projectID:int/fileID:int")]
-        public ActionResult SaveFile(int projectID, int fileID, string content)
+        public ActionResult SaveFile(FileSaveViewModel model)
         {
-            _service.saveFileContent(fileID, User.Identity.GetUserId<string>(), content);
-            return RedirectToAction("Edit", new { projectID = projectID, fileID = fileID });
+            _service.saveFileContent(model, User.Identity.GetUserId<string>());
+            return RedirectToAction("Edit", new { projectID = model.projectID, fileID = model.fileID });
         }
 
         public ActionResult DeleteFile(int fileID)

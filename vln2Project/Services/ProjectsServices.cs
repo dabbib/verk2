@@ -182,11 +182,11 @@ namespace h37.Services
         /// </summary>
         /// <param name="fileID"></param>
         /// <param name="content"></param>
-        public void saveFileContent(FileSaveViewModel model)
+        public void saveFileContent(FileSaveViewModel model, string userID)
         {
             var f = getFileByID(model.fileID);
             f.content = model.content;
-            logEvent(model.userID, model.fileID);
+            logEvent(userID, model.fileID);
             db.SaveChanges();
         }
 
