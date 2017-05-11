@@ -50,6 +50,13 @@ namespace h37.Controllers
             return RedirectToAction("Config", "Project", new { projectID = projectID });
         }
 
+        [HttpGet]
+        public ActionResult Unsubscribe(string userID, int projectID)
+        {
+            _uService.unsubscribeUser(userID, projectID);
+            return RedirectToAction("Index", "user");
+        }
+
         [HttpPost]
         public ActionResult UnsubscribeUser(string userID, int projectID)
         {

@@ -32,9 +32,9 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.createProject.projectType, "", new { @class = "col-md-2 control-label" })
                         <div class="col-md-10">
-                            <select data-val="true" data-val-required="The projectType field is required." htmlattributes="{ class = form-control }" id="projectType" name="projectType">
-                                <option value="">Select type</option>
-                                <option selected="selected" value="0">js</option>
+                            <select data-val="true" data-val-required="The projectType field is required." class="form-control btn btn-primary dropdown-toggle" id="projectType" name="projectType">
+                                <option selected="selected">Select type</option>
+                                <option value="0">js</option>
                                 <option value="1">cs</option>
                             </select>
                         </div>
@@ -59,7 +59,7 @@
                 <h3>Name: @Html.DisplayFor(x => item.projectName)</h3>
                 <p>Number of files: @Html.DisplayFor(x => item.numberOfFiles)</p>
                 @Html.ActionLink("Edit", "Edit", "Project", new { projectID = item.projectID }, new { @class = "btn btn-primary button-size-2" })
-                @Html.ActionLink("Unsubscribe", "UnsubscribeUser", "User", new { projectID = item.projectID, userID = Model.userID }, new { @class = "btn btn-danger button-size-2" })
+                @Html.ActionLink("Unsubscribe", "Unsubscribe", "User", new { projectID = item.projectID, userID = Model.userID }, new { @class = "btn btn-danger button-size-2" })
             </div>
         }
     </div>
