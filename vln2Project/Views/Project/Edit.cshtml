@@ -40,7 +40,6 @@
             <div class="col-xs-12 project table-bordered">
                 @using (Html.BeginForm("CreateFile", "Project"))
             {
-                    <p id="demo"></p>
                     <h4>Create new File</h4>
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
