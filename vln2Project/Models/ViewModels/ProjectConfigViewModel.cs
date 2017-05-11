@@ -15,5 +15,6 @@ namespace h37.Models.ViewModels
         public int numberOfFiles { get; set; }
         public projectType type { get; set; }
         public List<UserViewModel> userList { get; set; }
+        public List<UserViewModel> usersInProject { get; set; }
     }
 }
