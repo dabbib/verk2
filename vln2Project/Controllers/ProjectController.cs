@@ -15,6 +15,7 @@ namespace h37.Controllers
     public class ProjectController : Controller
     {
         private ProjectsServices _service = new ProjectsServices();
+        private UserServices _uService = new UserServices();
 
         [HttpGet]
         public ActionResult Index()
@@ -68,14 +69,14 @@ namespace h37.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route ("/Edit/projectID:int/fileID:int")]
+        [Route("/Edit/projectID:int/fileID:int")]
         public ActionResult Edit(int projectID, int fileID = 0)
         {
             var p = _service.getProjectByID(projectID);
             var e = _service.getEventLogForProject(projectID);
             var f = _service.getFiles(projectID);
             var x = new ProjectEditViewModel() { projectID = p.projectID, projectName = p.projectName, numberOfFiles = p.numberOfFiles, eventList = e, fileList = f };
-            if(fileID != 0)
+            if (fileID != 0)
             {
                 var file = _service.getFileByID(fileID);
                 ViewBag.code = file.content;
@@ -86,6 +87,28 @@ namespace h37.Controllers
                 ViewBag.fileName = "Please open file to edit";
             }
             return View(x);
+        }
+
+        [HttpGet]
+        [Route ("/Project/Configure/projectID:int")]
+        public ActionResult Config(int projectID)
+        {
+            Project p = _service.getProjectByID(projectID);
+            ProjectConfigViewModel model = new ProjectConfigViewModel();
+            model.projectName = p.projectName;
+            model.projectOwnerID = p.projectOwnerID;
+            model.numberOfFiles = p.numberOfFiles;
+            model.type = p.type;
+            model.userList = _uService.getListOfUsers();
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route ("/Project/Configure/projectID:int")]
+        public ActionResult SaveConfig(Project item)
+        {
+
+            return RedirectToAction("Index", "User");
         }
 
         [HttpGet]
