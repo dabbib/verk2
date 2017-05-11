@@ -87,16 +87,11 @@ namespace h37.Services
         /// </summary>
         /// <param name="userID"></param>
         /// <returns></returns>
-        public IEnumerable<ProjectViewModel> getProjectsForUser(string userID)
+        public List<Project> getProjectsForUser(string userID)
         {
-            IEnumerable<ProjectViewModel> p = (from x in db.Projects
-                                               where x.projectOwnerID.Equals(userID)
-                                               select new ProjectViewModel()
-                                               {
-                                                   projectID = x.projectID,
-                                                   projectName = x.projectName,
-                                                   numberOfFiles = x.numberOfFiles
-                                               }).ToList();
+            List<Project> p = (from x in db.Projects
+                                where x.projectOwnerID.Equals(userID)
+                                select x).ToList();
             return p;
         }
 

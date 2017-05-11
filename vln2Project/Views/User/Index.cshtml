@@ -1,4 +1,4 @@
-﻿@model IEnumerable<h37.Models.ViewModels.ProjectViewModel>
+﻿@model h37.Models.ViewModels.ProjectViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -6,7 +6,7 @@
 <section id="projectList">
     <h2>My projects</h2>
     <div class="row">
-        @foreach (var item in Model)
+        @foreach (var item in Model.projectList)
         {
             <div class="col-xs-4 project table-bordered">
                 <h3>Name: @Html.DisplayFor(x => item.projectName)</h3>
@@ -16,13 +16,37 @@
                 @Html.ActionLink("Configure", "ConfigureProject", "Project", new { projectID = item.projectID}, new { @class = "btn btn-success button-size-2" })
             </div>
         }
-
-        <div class="col-xs-4 project table-bordered foo-fang">
-            @using (Html.BeginForm())
-            {
-                @Html.ActionLink("Create Project", "CreateProject", "Project", new { area = "" }, new { @class = "btn btn-primary col-xs-4 project table-bordered", @id = "foo" })
-            }
-        </div>
+        <div class="col-xs-4 project table-bordered">
+            <section id="createProject">
+                @using (Html.BeginForm("CreateProject", "Project", FormMethod.Post))
+                {
+                    <h3 id="information">Create project</h3>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.createProject.projectName, "", new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            <input class="form-control" id="projectName" name="projectName" placeholder="PROJECT NAME" type="text">
+                            @Html.ValidationMessageFor(m => m.createProject.projectName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.createProject.projectType, "", new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            <select data-val="true" data-val-required="The projectType field is required." htmlattributes="{ class = form-control }" id="projectType" name="projectType">
+                                <option value="">Select type</option>
+                                <option selected="selected" value="0">js</option>
+                                <option value="1">cs</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-success" />
+                        </div>
+                    </div>
+                }
+            </section>
+          </div>
 
 
 
@@ -33,10 +57,3 @@
 </section>
 
 <hr/>
-
-<section id="createProject">
-    @using (Html.BeginForm())
-    {
-        @Html.ActionLink("Create Project", "CreateProject", "Project", new { area = "" }, new { @class = "btn btn-primary" })
-    }
-</section>
