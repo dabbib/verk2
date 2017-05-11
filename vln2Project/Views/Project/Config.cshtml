@@ -3,31 +3,64 @@
     ViewBag.Title = "Config";
 }
 
-<h2>Config</h2>
-@using (Html.BeginForm("SaveConfig", "Project", FormMethod.Post))
-{
-    <h3 id="information">Configure project</h3>
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.projectName, "", new { @class = "col-md-2 control-label" })
+<h2 id="haus2">Project Name: @Html.DisplayFor(x => Model.projectName)</h2>
+<section id="fileList" class="editor-left">
+    <div class="row">
+        <h3 id="haus2">Users in Project</h3>
+        <hr />
         <div class="col-md-10">
-            <input class="form-control" id="projectName" name="projectName" placeholder="PROJECT NAME" value="@Model.projectName" type="text">
-            @Html.ValidationMessageFor(m => m.projectName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save changes" class="btn btn-success" />
-        </div>
-    </div>
-}
 
-<h2>Add users</h2>
-@using (Html.BeginForm("SubscribeUser", "User", FormMethod.Post))
-{
-    @Html.LabelFor(m => m.userList, "", new { @class = "col-md-2 control-label" })
-    <div class="col-md-10">
-        @Html.DropDownListFor(m => m.userList, new SelectList(Model.userList, "userName"))
-    </div>
-}
+            @{
+                List<SelectListItem> listItems = new List<SelectListItem>();
 
+                foreach (var item in Model.userList)
+                {
+
+                    listItems.Add(new SelectListItem
+                    {
+                        Text = item.userName,
+                        Value = item.userName
+                    });
+                }
+            }
+            @Html.DropDownList("yourDropName",listItems, "Select User", new { @class = "form-control" })
+        </div>
+        <input type="submit" value="Save changes" class="btn btn-success" />
+    </div>
+</section>
+
+<div class="border-carrier">
+</div>
+
+<h3 id="information haus3" class="editor-right">Configure project</h3>
+<div class="editor-right">
+    @using (Html.BeginForm("SaveConfig", "Project", FormMethod.Post))
+    {
+        @*<h3 id="haus3" class="editor-right">@Html.ViewBag.projectName</h3>*@
+        <hr class="align-the-editor" />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.projectName, "", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                <input class="form-control" id="projectName" name="projectName" placeholder="PROJECT NAME" value="@Model.projectName" type="text">
+                @Html.ValidationMessageFor(m => m.projectName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.type, "", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                <select data-val="true" data-val-required="The projectType field is required." htmlattributes="{ class = form-control }" id="projectType" name="projectType">
+                    <option value="">Select type</option>
+                    <option selected="selected" value="0">js</option>
+                    <option value="1">cs</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save changes" class="btn btn-success" />
+            </div>
+        </div>
+    }
+</div>
+<div class="editor-left"></div>
