@@ -9,7 +9,7 @@
         <li>
             @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "btn btn-primary" })*@
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-primary" id="top-row-btn">Log off</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-primary primary-bigger" id="top-row-btn">Log off</a></li>
     </ul>
     }
 }
@@ -19,7 +19,7 @@ else
     if (path == "/Account/Login")
     {
         <ul class="bar-of-right">
-            <li>@Html.ActionLink("Register", "Register", "Account", new { area = "" }, new { @class = "btn btn-primary top-row-btn", @id = "top-row-btn" })</li>
+            <li>@Html.ActionLink("Register", "Register", "Account", new { area = "" }, new { @class = "btn btn-primary top-row-btn primary-bigger", @id = "top-row-btn" })</li>
         </ul>
     }
 
@@ -32,7 +32,7 @@ else
 
     else
     {
-        <li>@Html.ActionLink("Register", "Register", "Account", new { area = "" }, new { @class = "btn btn-primary top-row-btn", @id = "top-row-btn" })</li>
+        <li>@Html.ActionLink("Register", "Register", "Account", new { area = "" }, new { @class = "btn btn-primary top-row-btn primary-bigger", @id = "top-row-btn" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", new { area = "" }, new { @class = "btn btn-success big-success-btn top-row-btn", @id = "top-row-btn" })</li>
 
         <!--Original Register and Login links

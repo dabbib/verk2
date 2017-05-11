@@ -20,8 +20,8 @@ h2 {
     position: fixed;
     top: 0;
     bottom: 0;
-    left: 95%;
-    right: 0;
+    left: 90%;
+    right: 0%;
     z-index: -1;
 }
 
@@ -31,18 +31,11 @@ h2 {
     top: 0;
     bottom: 0;
     left: 0;
-    right: 95%;
+    right: 90%;
     z-index: -1;
 }
 
 #bg-bottom {
-    background-color: lightblue;
-    position: fixed;
-    top: 95%;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: -1;
 }
 
 
@@ -67,16 +60,20 @@ ul {
 }
 
 .btn-primary {
+    border-style: solid;
+    border-color: dodgerblue;
+    float: left;
+}
+
+.primary-bigger {
     margin-top: 5px;
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 8px;
-    border-style: solid;
-    border-color: dodgerblue;
-    float: left;
     padding: 15px 15px;
     font-size: 18px;
     line-height: 20px;
+
 }
 
 #top-row-btn {
@@ -122,8 +119,8 @@ ul {
 
 .col-xs-4 {
     position: relative;
-    min-height: 1px;
-    width: 33.33333333333333%;
+    min-height: 1px;;
+    width: 100%;
     float: left;
     border-color: red;
 }
@@ -134,5 +131,49 @@ ul {
     line-height: 6.7;
     background-color: white;
     color: blue;
-    border-color: red;
+    border-color: red
+    
+}
+
+.editor-right {
+    float: right;
+    width: 70%;
+    height: 100%;
+
+}
+
+.editor-left {
+    float: left;
+    width: 27.5%;
+    height: 100%;
+}
+
+#eventLog {
+    border: 2px solid black;
+}
+
+.border-carrier {
+    position:absolute;
+    left:37.75%;
+    top:12%;
+    bottom:3%;
+    border-left:1px solid gray;
+}
+
+#haus2 {
+    margin-bottom: 20px;
+}
+
+.to-right {
+    float: right;
+    width: 30%;
+    height: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.to-left {
+    word-wrap: break-word;
+    float: left;
+    width: 60%;
 }
