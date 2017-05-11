@@ -69,3 +69,22 @@
     }
 </div>
 <div class="editor-left"></div>
+
+<section id="usersInProject">
+    <div>
+        @foreach (var item in Model.usersInProject)
+        {
+            <div class="col-xs-12 user table-bordered">
+                <h4 class="to-left">Name: @Html.DisplayFor(x => item.userName)</h4>
+                <div class="to-right">
+                    @using (Html.BeginForm("UnsubscribeUser", "User", FormMethod.Post))
+                    {
+                        <input id="userID" name="userID" type="hidden" userID=@item.userID value=@item.userID>
+                        @Html.HiddenFor(m => m.projectID, new { projectID = Model.projectID })
+                        <input type="submit" value="Remove" class="btn btn-danger button-size-1" />
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</section>

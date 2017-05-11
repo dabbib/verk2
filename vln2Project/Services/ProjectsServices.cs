@@ -86,13 +86,27 @@ namespace h37.Services
         /// This functions returns all projects for a given user.
         /// </summary>
         /// <param name="userID"></param>
-        /// <returns></returns>
+        /// <returns>List of projects</returns>
         public List<Project> getProjectsForUser(string userID)
         {
             List<Project> p = (from x in db.Projects
                                 where x.projectOwnerID.Equals(userID)
                                 select x).ToList();
             return p;
+        }
+
+        /// <summary>
+        /// This function returns a list of projects a user is subscribed to
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns>List of projects</returns>
+        public List<Project> getProjectsSharedWithUser(string userID)
+        {
+            List<Project> r = (from x in db.UsersInProjects
+                               join p in db.Projects on x.projectID equals p.projectID
+                               where x.userID.Equals(userID)
+                               select p).ToList();
+            return r;
         }
 
         /// <summary>

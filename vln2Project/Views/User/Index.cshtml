@@ -47,13 +47,20 @@
                 }
             </section>
           </div>
-
-
-
     </div>
-    <hr/>
-    <h2>Projects shared with you</h2>
-    <p>Ooops in progress</p>
 </section>
-
-<hr/>
+<hr />
+<section id="sharedProjectList">
+    <h2>Projects shared with me</h2>
+    <div class="row">
+        @foreach (var item in Model.sharedProjectList)
+        {
+            <div class="col-xs-4 project table-bordered">
+                <h3>Name: @Html.DisplayFor(x => item.projectName)</h3>
+                <p>Number of files: @Html.DisplayFor(x => item.numberOfFiles)</p>
+                @Html.ActionLink("Edit", "Edit", "Project", new { projectID = item.projectID }, new { @class = "btn btn-primary button-size-2" })
+                @Html.ActionLink("Unsubscribe", "UnsubscribeUser", "User", new { projectID = item.projectID, userID = Model.userID }, new { @class = "btn btn-danger button-size-2" })
+            </div>
+        }
+    </div>
+</section>

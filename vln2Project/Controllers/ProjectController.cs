@@ -101,6 +101,7 @@ namespace h37.Controllers
             model.numberOfFiles = p.numberOfFiles;
             model.type = p.type;
             model.userList = _uService.getListOfUsers();
+            model.usersInProject = _uService.getListOfUsersInProject(projectID);
             return View(model);
         }
 

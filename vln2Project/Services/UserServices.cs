@@ -14,6 +14,7 @@ namespace h37.Services
     public class UserServices
     {
         private ApplicationDbContext db;
+        private ProjectsServices _pService = new ProjectsServices();
 
         public UserServices()
         {
@@ -31,13 +32,22 @@ namespace h37.Services
             {
                 throw new ArgumentException("User already in project");
             }
+            if(_pService.getProjectByID(projectID).projectOwnerID.Equals(userID))
+            {
+                throw new ArgumentException("User is owner of project");
+            }
             var x = new usersInProjects(userID, projectID);
             db.UsersInProjects.Add(x);
             db.SaveChanges();
         }
-        public void unsubscribeUser(int projectID, string userID)
+        public void unsubscribeUser(string userID, int projectID)
         {
-            /* Todo */
+            var u = (from v in db.UsersInProjects
+                     where v.projectID.Equals(projectID)
+                     & v.userID.Equals(userID)
+                     select v).SingleOrDefault();
+            db.UsersInProjects.Remove(u);
+            db.SaveChanges();
         }
 
         public IUser getUserByName(string userName)
@@ -59,6 +69,18 @@ namespace h37.Services
             return r;
         }
 
-
+        public List<UserViewModel> getListOfUsersInProject(int projectID)
+        {
+            var r = (from x in db.UsersInProjects
+                     join u in db.Users on x.userID equals u.Id
+                     where x.projectID.Equals(projectID)
+                     select new UserViewModel
+                     {
+                         userID = x.userID,
+                         userName = u.UserName
+                     } 
+                     ).ToList();
+            return r;
+        }
     }
 }
