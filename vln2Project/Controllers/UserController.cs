@@ -1,4 +1,5 @@
-﻿using h37.Services;
+﻿using h37.Models.ViewModels;
+using h37.Services;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,8 @@ namespace h37.Controllers
         public ActionResult Index()
         {
             var result = _pService.getProjectsForUser(User.Identity.GetUserId<string>());
-            return View(result);
+            var model = new ProjectViewModel { projectList = result, createProject = null };
+            return View(model);
         }
     }
 }
