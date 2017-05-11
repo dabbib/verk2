@@ -155,15 +155,16 @@ namespace h37.Services
         /// <returns>ID of the file created</returns>
         public int createFile(int projectID, string userID, string fileName)
         {
+            string t = getProjectType(projectID).ToString();
             var f = (from x in db.Files
-                     where x.fileName.Equals(fileName) & x.projectID.Equals(projectID)
+                     where x.fileName.Equals(fileName + "." + t) & x.projectID.Equals(projectID)
                      select x).SingleOrDefault();
             if(f != null)
             {
                 throw new ArgumentException("This file name is already taken");
             }
             
-            File newFile = new File(fileName +"."+ getProjectType(projectID).ToString(), getProjectType(projectID).ToString(), projectID);
+            File newFile = new File(fileName +"."+ t, getProjectType(projectID).ToString(), projectID);
             incrementProjectFileCounter(projectID);
 
             db.Files.Add(newFile);
@@ -184,6 +185,10 @@ namespace h37.Services
         /// <param name="content"></param>
         public void saveFileContent(FileSaveViewModel model, string userID)
         {
+            if(model.fileID == 0)
+            {
+                throw new ArgumentException("Can not save if there is no open file");
+            }
             var f = getFileByID(model.fileID);
             f.content = model.content;
             logEvent(userID, model.fileID);

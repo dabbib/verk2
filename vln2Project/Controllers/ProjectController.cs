@@ -98,7 +98,6 @@ namespace h37.Controllers
         [HttpPost]
         public ActionResult CreateFile(FileCreateViewModel model)
         {
-            //model.projectID = projectID;
             model.userID = User.Identity.GetUserId<string>();
             if (ModelState.IsValid)
             {
@@ -127,7 +126,14 @@ namespace h37.Controllers
         [Route("~/Project/Edit/projectID:int/fileID:int")]
         public ActionResult SaveFile(FileSaveViewModel model)
         {
-            _service.saveFileContent(model, User.Identity.GetUserId<string>());
+            try
+            {
+                _service.saveFileContent(model, User.Identity.GetUserId<string>());
+            }
+            catch (ArgumentException e)
+            {
+                return new HttpStatusCodeResult(403, e.Message);
+            }
             return RedirectToAction("Edit", new { projectID = model.projectID, fileID = model.fileID });
         }
 
