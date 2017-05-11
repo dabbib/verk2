@@ -68,13 +68,17 @@ namespace h37.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route ("/Edit/projectID:int")]
-        public ActionResult Edit(int projectID)
+        [Route ("/Edit/projectID:int/fileID:int")]
+        public ActionResult Edit(int projectID, int fileID = 0)
         {
             var p = _service.getProjectByID(projectID);
             var e = _service.getEventLogForProject(projectID);
             var f = _service.getFiles(projectID);
             var x = new ProjectEditViewModel() { projectID = p.projectID, projectName = p.projectName, numberOfFiles = p.numberOfFiles, eventList = e, fileList = f };
+            if(fileID != 0)
+            {
+                ViewBag.code = _service.getFileByID(fileID).content;
+            }
             return View(x);
         }
 
@@ -103,6 +107,14 @@ namespace h37.Controllers
                 return RedirectToAction("Edit", new { projectID = model.projectID });
             }
             return null;
+        }
+
+        [HttpGet]
+        [Route("~/Project/Edit/projectID:int/fileID:int")]
+        public ActionResult EditFile(int fileID, int projectID)
+        {
+            ViewBag.Code = _service.getFileByID(fileID).content;
+            return RedirectToAction("Edit", new { projectID = projectID, fileID = fileID });
         }
 
         public ActionResult DeleteFile(int fileID)

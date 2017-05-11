@@ -18,7 +18,6 @@ namespace h37.Services
         public ProjectsServices()
         {
             db = new ApplicationDbContext();
-
         }
         
 
@@ -60,7 +59,7 @@ namespace h37.Services
 
 
             /* Create the index file for the new project */
-            createFile(newProject.projectID, userID, "index." + type);
+            createFile(newProject.projectID, userID, "index");
             return newProject.projectID;
 
         }
@@ -83,6 +82,11 @@ namespace h37.Services
             return p;
         }
 
+        /// <summary>
+        /// This functions returns all projects for a given user.
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
         public IEnumerable<ProjectViewModel> getProjectsForUser(string userID)
         {
             IEnumerable<ProjectViewModel> p = (from x in db.Projects
@@ -159,7 +163,7 @@ namespace h37.Services
                 throw new ArgumentException("This file name is already taken");
             }
             
-            File newFile = new File(fileName, getProjectType(projectID).ToString(), projectID);
+            File newFile = new File(fileName +"."+ getProjectType(projectID).ToString(), getProjectType(projectID).ToString(), projectID);
             incrementProjectFileCounter(projectID);
 
             db.Files.Add(newFile);
