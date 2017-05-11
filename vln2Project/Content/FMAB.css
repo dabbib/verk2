@@ -60,16 +60,20 @@ ul {
 }
 
 .btn-primary {
+    border-style: solid;
+    border-color: dodgerblue;
+    float: left;
+}
+
+.primary-bigger {
     margin-top: 5px;
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 8px;
-    border-style: solid;
-    border-color: dodgerblue;
-    float: left;
     padding: 15px 15px;
     font-size: 18px;
     line-height: 20px;
+
 }
 
 #top-row-btn {
@@ -132,13 +136,44 @@ ul {
 }
 
 .editor-right {
+    float: right;
     width: 70%;
     height: 100%;
-    float: right;
+
 }
 
 .editor-left {
     float: left;
     width: 27.5%;
     height: 100%;
+}
+
+#eventLog {
+    border: 2px solid black;
+}
+
+.border-carrier {
+    position:absolute;
+    left:37.75%;
+    top:12%;
+    bottom:3%;
+    border-left:1px solid gray;
+}
+
+#haus2 {
+    margin-bottom: 20px;
+}
+
+.to-right {
+    float: right;
+    width: 30%;
+    height: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.to-left {
+    word-wrap: break-word;
+    float: left;
+    width: 60%;
 }
