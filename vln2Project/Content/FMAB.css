@@ -120,7 +120,7 @@ ul {
 .col-xs-4 {
     margin: 1px 1px 1px 1px;
     position: relative;
-    min-height: 130px;
+    min-height: 140px;
     width: 33%;
     float: left;
     border-color: blue;
@@ -208,15 +208,16 @@ ul {
     width: 100%;
     margin-top: 1px;
     margin-bottom: 1px;
-    border: 3px solid purple;
+    border: 3px solid black;
 }
 
 .button-size-2 {
-    float: left;
-    width: 33.3333333333%;
-    margin-top: 1px;
+    float: initial;
+    position: relative;
+    width: 33%;
+    margin-top: 3px;
     margin-bottom: 1px;
-    border: 3px solid purple;
+    border: 3px solid black;
 }
 
 .button-size-3 {
@@ -225,19 +226,33 @@ ul {
     right: -20px;
     float: right;
     width: 50%;
-    border: 3px solid purple;
+    border: 3px solid black;
 }
 
 .button-size-4 {
     float: right;
-    border: 3px solid purple;
+    border: 3px solid black;
     margin-top: 20px;
 }
 
 .button-size-5 {
     float: right;
-    border: 3px solid purple;
+    border: 3px solid black;
     margin-top: -56px;
+}
+
+.button-size-6 {
+    margin-right: -70px;
+    float: right;
+    width: 40%;
+    border: 3px solid black;
+}
+
+.left-float-dropdown {
+    width: 85%;
+    left: -19px;
+    float: left;
+    margin-bottom: 10px;
 }
 
 .left-float-input {
@@ -252,4 +267,22 @@ ul {
     border-bottom: 2px solid black;
     width: 95%;
     margin-bottom: 10px;
+}
+
+.on-the-left {
+    word-wrap: break-word;
+    float: left;
+    width: 66%;
+}
+
+.create-dropdown {
+    float:initial;
+    margin-top: 8px;
+    margin-left: -20px;
+}
+
+.create-btn {
+    margin-top: -37px;
+    margin-right: -13px;
+
 }

@@ -25,9 +25,9 @@
             }
             @using (Html.BeginForm("SubscribeUser", "User", FormMethod.Post))
             {
-                @Html.DropDownList("userName", listItems, "Select User", new { @class = "form-control" })
+                @Html.DropDownList("userName", listItems, "Select User", new { @class = "form-control left-float-dropdown" })
                 @Html.HiddenFor(m => m.projectID, new { projectID = Model.projectID })
-                <input type="submit" value="Add user" class="btn btn-success" />
+                <input type="submit" value="Add user" class="btn btn-success button-size-6" />
             }
         </div>
         
@@ -63,14 +63,14 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save changes" class="btn btn-success" />
+                <input type="submit" value="Save changes" class="btn btn-success button-size-5" />
             </div>
         </div>
     }
 </div>
 <div class="editor-left"></div>
 
-<section id="usersInProject">
+<section id="usersInProject" class="editor-left">
     <div>
         @foreach (var item in Model.usersInProject)
         {
