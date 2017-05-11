@@ -11,9 +11,9 @@
             <div class="col-xs-4 project table-bordered">
                 <h3>Name: @Html.DisplayFor(x => item.projectName)</h3>
                 <p>Number of files: @Html.DisplayFor(x => item.numberOfFiles)</p>
-                @Html.ActionLink("Edit", "Edit", "Project", new { projectID = item.projectID }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Delete", "DeleteProject", "Project", new { projectID = item.projectID }, new { @class = "btn btn-danger" })
-                @Html.ActionLink("Configure", "ConfigureProject", "Project", new { projectID = item.projectID}, new { @class = "btn btn-success"})
+                @Html.ActionLink("Edit", "Edit", "Project", new { projectID = item.projectID }, new { @class = "btn btn-primary button-size-2" })
+                @Html.ActionLink("Delete", "DeleteProject", "Project", new { projectID = item.projectID }, new { @class = "btn btn-danger button-size-2" })
+                @Html.ActionLink("Configure", "ConfigureProject", "Project", new { projectID = item.projectID}, new { @class = "btn btn-success button-size-2" })
             </div>
         }
         <div class="col-xs-4 project table-bordered">

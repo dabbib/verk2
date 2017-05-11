@@ -119,20 +119,33 @@ ul {
 
 .col-xs-4 {
     position: relative;
-    min-height: 1px;;
-    width: 100%;
+    min-height: 130px;
+    width: 33.333333333%;
     float: left;
     border-color: red;
 }
 
+.col-xs-12 {
+    position: relative;
+    min-height: 1px;
+    width: 100%;
+    float: left;
+    border-color: red;
+
+}
+
 #foo {
-    margin: auto;
     text-align: center;
-    line-height: 6.7;
+    width: 100%;
+    line-height: 7.6;
     background-color: white;
     color: blue;
     border-color: red
-    
+}
+
+.foo-fang {
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
 .editor-right {
@@ -164,6 +177,17 @@ ul {
     margin-bottom: 20px;
 }
 
+#haus3 {
+    right: -50px;
+    width: 50%;
+    position: relative;
+    float: left;
+}
+
+.align-the-editor {
+    margin-top: 10px;
+}
+
 .to-right {
     float: right;
     width: 30%;
@@ -176,4 +200,48 @@ ul {
     word-wrap: break-word;
     float: left;
     width: 60%;
+}
+
+.button-size-1 {
+    width: 100%;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    border: 3px solid purple;
+}
+
+.button-size-2 {
+    float: left;
+    width: 33.3333333333%;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    border: 3px solid purple;
+}
+
+.button-size-3 {
+    position: relative;
+    top: -37px;
+    right: -20px;
+    float: right;
+    width: 50%;
+    border: 3px solid purple;
+}
+
+.button-size-4 {
+    float: right;
+    border: 3px solid purple;
+    margin-top: 20px;
+}
+
+.left-float-input {
+    width: 85%;
+    left: -19px;
+    position: relative;
+    float: left;
+}
+
+.event-table {
+    position: relative;
+    border-bottom: 2px solid black;
+    width: 95%;
+    margin-bottom: 10px;
 }
