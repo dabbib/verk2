@@ -80,6 +80,7 @@ namespace h37.Controllers
             {
                 var file = _service.getFileByID(fileID);
                 ViewBag.code = file.content;
+                ViewBag.fileID = file.fileID;
                 ViewBag.fileName = "You are editing " + file.fileName;
             }
             else
