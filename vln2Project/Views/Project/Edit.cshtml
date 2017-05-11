@@ -49,11 +49,11 @@
 <!--This is the div for the ace editor-->
 <div class="editor-right">
     <h3 id="haus2">@Html.ViewBag.fileName</h3>
-    @using (Html.BeginForm("SaveFile", "Project", FormMethod.Post))
+    @using (Html.BeginForm("SaveFile", "Project", FormMethod.Post, new { @id = "saveFile", @name = "saveFile" }))
     {
-        @Html.HiddenFor(m => m.fileSave.content, new { @id = "hidden_editor" })
-        @Html.HiddenFor(m => m.fileSave.projectID, new { projectID = Model.projectID })
-        @Html.HiddenFor(m => m.fileSave.fileID, new { fileID = Request.Params["fileID"]})
+        <input id="content" name="content" type="hidden">
+        <input data-val="true" data-val-number="The field projectID must be a number." data-val-required="The projectID field is required." id="projectID" name="projectID" value=@Model.projectID type="hidden">
+        <input data-val="true" data-val-number="The field fileID must be a number." data-val-required="The fileID field is required." value=@Request.Params["fileID"] id="fileID" name="fileID" type="hidden">
         <input type="submit" value="Save" class="btn btn-success" />
     }
     <hr />
@@ -70,8 +70,8 @@
         var editor = ace.edit("editor");
         editor.setTheme("ace/theme/monokai");
         editor.getSession().setMode("ace/mode/javascript");
-        $("saveForm").submit(function () {
-            $("#hidden_editor").val(editor.getSession().getValue());
+        $("form").submit(function () {
+            $("#content").val(editor.getSession().getValue());
         });
     </script>
 }
