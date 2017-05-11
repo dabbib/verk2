@@ -77,7 +77,13 @@ namespace h37.Controllers
             var x = new ProjectEditViewModel() { projectID = p.projectID, projectName = p.projectName, numberOfFiles = p.numberOfFiles, eventList = e, fileList = f };
             if(fileID != 0)
             {
-                ViewBag.code = _service.getFileByID(fileID).content;
+                var file = _service.getFileByID(fileID);
+                ViewBag.code = file.content;
+                ViewBag.fileName = "You are editing " + file.fileName;
+            }
+            else
+            {
+                ViewBag.fileName = "Please open file to edit";
             }
             return View(x);
         }
@@ -114,6 +120,14 @@ namespace h37.Controllers
         public ActionResult EditFile(int fileID, int projectID)
         {
             ViewBag.Code = _service.getFileByID(fileID).content;
+            return RedirectToAction("Edit", new { projectID = projectID, fileID = fileID });
+        }
+
+        [HttpPost]
+        [Route("~/Project/Edit/projectID:int/fileID:int")]
+        public ActionResult SaveFile(int projectID, int fileID, string content)
+        {
+            _service.saveFileContent(fileID, User.Identity.GetUserId<string>(), content);
             return RedirectToAction("Edit", new { projectID = projectID, fileID = fileID });
         }
 

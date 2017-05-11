@@ -237,6 +237,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\EventLogViewModel.cs" />
     <Compile Include="Models\ViewModels\FileCreateViewModel.cs" />
+    <Compile Include="Models\ViewModels\FileSaveViewModel.cs" />
     <Compile Include="Models\ViewModels\ProjectCreateViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModels.cs" />
     <Compile Include="Models\ViewModels\ProjectConfigViewModel.cs" />

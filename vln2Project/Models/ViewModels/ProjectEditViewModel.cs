@@ -14,6 +14,7 @@ namespace h37.Models.ViewModels
         public List<File> fileList { get; set; }
         public List<EventLogViewModel> eventList { get; set; }
         public FileCreateViewModel createFile { get; set; }
+        public FileSaveViewModel fileSave { get; set; }
 
     }
 }
