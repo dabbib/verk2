@@ -10,6 +10,13 @@
         <hr />
         <div class="col-md-10">
 
+            @*
+            * This section generates and shows a dropdown list of users
+            * that are available to be added to the project.
+            * It prevents the user from adding someone to the project that
+            * is already part of the project, or the owner of the project
+            * himself.
+            *@
             @{
                 List<SelectListItem> listItems = new List<SelectListItem>();
 
@@ -47,6 +54,12 @@
 <div class="border-carrier">
 </div>
 
+    @*
+    * This section include all of the configuration options for
+    * the current project.
+    * As of the current build, the use is only able to change the
+    * name or the type (c#, js) of the project.
+    *@
 <h3 id="information haus3" class="editor-right">Configure project</h3>
 <div class="editor-right">
     @using (Html.BeginForm("SaveConfig", "Project", FormMethod.Post))
@@ -80,6 +93,12 @@
 </div>
 <div class="editor-left"></div>
 
+    @*
+    * This section shows all the users that currently have
+    * access to the project. It also generates a remove button
+    * for the owner of the project to remove other users from
+    * the project.
+    *@
 <section id="usersInProject" class="editor-left">
     <div>
         @foreach (var item in Model.usersInProject)

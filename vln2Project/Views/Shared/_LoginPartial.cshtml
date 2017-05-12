@@ -1,4 +1,18 @@
 ﻿@using Microsoft.AspNet.Identity
+
+    @*
+    * This section checks if the user is logged in.
+    * If the user is logged in, then the top right
+    * corner will show a log off button for the user
+    * to allow the user to log off.
+    * If the user has not logged in then the top right
+    * will show the user a button that takes them either
+    * to the register or log in pages, depending on if
+    * the user is on the log in page or register page.
+    * If the user is in the Log in page, it will show a
+    * register button, and vice versa if the user is on
+    * the register page.
+    *@
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))

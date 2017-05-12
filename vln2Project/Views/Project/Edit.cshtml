@@ -3,6 +3,10 @@
     ViewBag.Title = "Edit";
 }
 
+@*
+    * Disables the save button if the user has
+    * not selected a file to edit.
+*@
 <head>
     <script type="text/javascript">
         function load() {
@@ -27,6 +31,10 @@
         <div class="row">
             <h3 id="haus2">Files</h3>
             <hr />
+            @*
+            * Shows the user the list of of the files that
+            * the user has access to in the project.
+            *@
             @foreach (var item in Model.fileList)
             {
                 <div class="col-xs-12 project table-bordered">
@@ -65,7 +73,10 @@
     <div class="border-carrier">
     </div>
 
-
+    @*
+    * This section holds the code that allows the user to
+    * create and add a new file to the current project.
+    *@
 <h3 id="haus3" class="editor-right">@Html.ViewBag.fileName</h3>
 @using (Html.BeginForm("SaveFile", "Project", FormMethod.Post))
 {
@@ -123,6 +134,12 @@
         </script>
     }
 
+    @*
+    * This section is the Event Log. It shows a log to every user
+    * in the project details about the project. It shows the users
+    * When the edit took place, who was editing, the type of editing
+    * done to the file and the name of the file that was edited.
+    *@
     <div class="editor-right">
         <section id="eventLog">
             <h2>Event log</h2>

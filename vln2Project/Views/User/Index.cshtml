@@ -6,6 +6,13 @@
 <section id="projectList">
     <h2>My projects</h2>
     <div class="row">
+        @*
+        * This section looks at the complete list of projects
+        * that each user has created themselves and shows them
+        * in order of when they were created.
+        * It also creates the Edit, Delete and Configure buttons
+        * and links the user to those pages if relevant.
+        *@
         @foreach (var item in Model.projectList)
         {
             <div class="col-xs-4 project table-bordered">
@@ -16,6 +23,12 @@
                 @Html.ActionLink("Configure", "Config", "Project", new { projectID = item.projectID}, new { @class = "btn btn-success button-size-2" })
             </div>
         }
+
+        @*
+        * This form allows the user to create a new project,
+        * decide what to name it and of what type of file (c#, js)
+        * the project will have.
+        *@
         <div class="col-xs-4 project table-bordered">
             <section id="createProject">
                 @using (Html.BeginForm("CreateProject", "Project", FormMethod.Post))
@@ -52,6 +65,13 @@
     </div>
 </section>
 <hr />
+
+        @*
+        * This section is the same as the first one, which shows 
+        * the projects the user has access to, except that in this
+        * case, it generates and shows the projects a user has access
+        * that other users have created and shared with them.
+        *@
 <section id="sharedProjectList">
     <h2>Projects shared with me</h2>
     <div class="row">
