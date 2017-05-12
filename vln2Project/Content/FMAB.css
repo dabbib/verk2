@@ -2,7 +2,8 @@
 }
 
 h2 {
-    text-decoration: underline;
+    padding-top: 15px;
+    text-decoration
 }
 
 #welcome {
@@ -16,7 +17,7 @@ h2 {
 }
 
 #bg-right {
-    background-color: lightblue;
+    background-color: #c1cfda;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -26,7 +27,7 @@ h2 {
 }
 
 #bg-left {
-    background-color: lightblue;
+    background-color: #c1cfda;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -104,8 +105,8 @@ ul {
 }
 
 .navbar-inverse {
-    background-color: lightblue;
-    border-color: lightblue;
+    background-color: #c1cfda;
+    border-color: #c1cfda;
     margin-bottom: 0px;
 }
 
@@ -123,7 +124,7 @@ ul {
     min-height: 140px;
     width: 33%;
     float: left;
-    border-color: blue;
+    border-color: #c1cfda;
 }
 
 .col-xs-12 {
@@ -132,7 +133,7 @@ ul {
     min-height: 1px;
     width: 100%;
     float: left;
-    border-color: blue;
+    border-color: #c1cfda;
 
 }
 
@@ -141,7 +142,7 @@ ul {
     width: 100%;
     line-height: 7.6;
     background-color: white;
-    color: blue;
+    color: #605f5e;
     border-color: red
 }
 
@@ -164,7 +165,7 @@ ul {
 }
 
 #eventLog {
-    border: 2px solid black;
+    border: 2px solid #c1cfda;
 }
 
 .border-carrier {
@@ -188,6 +189,7 @@ ul {
 
 .align-the-editor {
     margin-top: 10px;
+    color: #c1cfda;
 }
 
 .to-right {
@@ -208,7 +210,7 @@ ul {
     width: 100%;
     margin-top: 1px;
     margin-bottom: 1px;
-    border: 3px solid black;
+    border: 3px solid #c1cfda;
 }
 
 .button-size-2 {
@@ -217,7 +219,7 @@ ul {
     width: 33%;
     margin-top: 3px;
     margin-bottom: 1px;
-    border: 3px solid black;
+    border: 3px solid #c1cfda;
 }
 
 .button-size-3 {
@@ -226,18 +228,18 @@ ul {
     right: -20px;
     float: right;
     width: 50%;
-    border: 3px solid black;
+    border: 3px solid #c1cfda;
 }
 
 .button-size-4 {
     float: right;
-    border: 3px solid black;
+    border: 3px solid #c1cfda;
     margin-top: 20px;
 }
 
 .button-size-5 {
     float: right;
-    border: 3px solid black;
+    border: 3px solid #c1cfda;
     margin-top: -56px;
 }
 
@@ -245,7 +247,7 @@ ul {
     margin-right: -70px;
     float: right;
     width: 40%;
-    border: 3px solid black;
+    border: 3px solid #c1cfda;
 }
 
 .left-float-dropdown {
@@ -264,7 +266,7 @@ ul {
 
 .event-table {
     position: relative;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #c1cfda;
     width: 95%;
     margin-bottom: 10px;
 }
