@@ -303,3 +303,12 @@ ul {
     margin-right: -13px;
 
 }
+
+.User-Name {
+    float: left;
+    position: initial;
+    width: 150%;
+    margin-top: 5px;
+    margin-left: -150px;
+    margin-bottom: 0px;
+}
