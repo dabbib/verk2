@@ -9,6 +9,11 @@ namespace h37.Models.ViewModels
 {
     public class ProjectViewModel
     {
+        /* 
+         * This view modl is sent to the index view in user
+         * to display list of projects. Both those who the user
+         * owns and those that are shared with the user.
+         */
         public string userID { get; set; }
         public List<Project> projectList { get; set; }
         public List<Project> sharedProjectList { get; set; }

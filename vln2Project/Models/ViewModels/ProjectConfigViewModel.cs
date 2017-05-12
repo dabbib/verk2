@@ -6,6 +6,10 @@ namespace h37.Models.ViewModels
 {
     public class ProjectConfigViewModel
     {
+        /*
+         * This view model is sent to the Config view
+         * for project configuration.
+         */
         public ProjectConfigViewModel()
         {
 

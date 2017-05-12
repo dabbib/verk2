@@ -21,7 +21,13 @@ namespace h37.Services
             db = new ApplicationDbContext();
         }
 
-        
+        /// <summary>
+        /// This function handles user subscribtions.
+        /// It hrows ArgumentException if user is already in project
+        /// or if the user is the owner of the project.
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="projectID"></param>
         public void subscribeUser(string userID, int projectID)
         {
             var u = (from v in db.UsersInProjects
@@ -40,6 +46,12 @@ namespace h37.Services
             db.UsersInProjects.Add(x);
             db.SaveChanges();
         }
+
+        /// <summary>
+        /// This function handles unsubscribtions.
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="projectID"></param>
         public void unsubscribeUser(string userID, int projectID)
         {
             var u = (from v in db.UsersInProjects
@@ -50,6 +62,11 @@ namespace h37.Services
             db.SaveChanges();
         }
 
+        /// <summary>
+        /// This user gets a user with a given username.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns>User</returns>
         public IUser getUserByName(string userName)
         {
             var u = (from x in db.Users
@@ -58,6 +75,10 @@ namespace h37.Services
             return u;
         }
 
+        /// <summary>
+        /// This function returns list of all users.
+        /// </summary>
+        /// <returns>List of users</returns>
         public List<UserViewModel> getListOfUsers()
         {
             var r = (from x in db.Users
@@ -69,6 +90,11 @@ namespace h37.Services
             return r;
         }
 
+        /// <summary>
+        /// This function returns a list of all subscribed users in a given project
+        /// </summary>
+        /// <param name="projectID"></param>
+        /// <returns>List of subscribed users in a project</returns>
         public List<UserViewModel> getListOfUsersInProject(int projectID)
         {
             var r = (from x in db.UsersInProjects
