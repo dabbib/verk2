@@ -67,6 +67,10 @@ namespace h37.Services
 
         }
 
+        /// <summary>
+        /// This function updates a given project.
+        /// </summary>
+        /// <param name="p"></param>
         public void updateProject(Project p)
         {
             Project u = getProjectByID(p.projectID);
