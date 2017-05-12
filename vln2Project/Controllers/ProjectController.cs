@@ -137,7 +137,8 @@ namespace h37.Controllers
         [Route ("/Project/Configure/projectID:int")]
         public ActionResult SaveConfig(Project item)
         {
-            return RedirectToAction("Index", "User");
+            _service.updateProject(item);
+            return RedirectToAction("Config", "Project", new { projectID = item.projectID });
         }
 
         /// <summary>
