@@ -67,6 +67,15 @@ namespace h37.Services
 
         }
 
+        public void updateProject(Project p)
+        {
+            Project u = getProjectByID(p.projectID);
+            u.projectName = p.projectName;
+            u.type = p.type;
+            u.projectOwnerID = p.projectOwnerID;
+            db.SaveChanges();
+        }
+
         /// <summary>
         /// Function to get projects by id.
         /// </summary>
@@ -173,6 +182,10 @@ namespace h37.Services
         /// <returns>ID of the file created</returns>
         public int createFile(int projectID, string userID, string fileName)
         {
+            if(fileName == null)
+            {
+                throw new Exception("File name cannot be empty");
+            }
             string t = getProjectType(projectID).ToString();
             var f = (from x in db.Files
                      where x.fileName.Equals(fileName + "." + t) & x.projectID.Equals(projectID)
