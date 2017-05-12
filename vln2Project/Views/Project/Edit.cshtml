@@ -82,13 +82,11 @@
     <input data-val="true" data-val-number="The field fileID must be a number." data-val-required="The fileID field is required." id="fileID" name="fileID" fileID=@Request.Params["fileID"] type="hidden" value=@Request.Params["fileID"]>
     <input type="submit" value="Save" class="btn btn-success button-size-4" id="sav-btn" />
 }
-@Html.ActionLink("Configure Project", "Config", "Project", new { projectID = Model.projectID }, new { @class = "btn btn-success button-size-7" })
+@Html.ActionLink("Configure project", "Config", "Project", new { projectID = Model.projectID }, new { @class = "btn btn-success button-size-7" })
 <!--This is the div for the ace editor-->
 <div class="editor-right">
     <hr class="align-the-editor" />
-    <div id="editor">
-        @ViewBag.code
-    </div>
+    <div id="editor">@ViewBag.code</div>
 </div>
 
     <!--This is a script for the ace editor-->

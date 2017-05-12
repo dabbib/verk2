@@ -89,10 +89,18 @@ namespace h37.Controllers
             var x = new ProjectEditViewModel() { projectID = p.projectID, projectName = p.projectName, numberOfFiles = p.numberOfFiles, eventList = e, fileList = f };
             if (fileID != 0)
             {
-                var file = _service.getFileByID(fileID);
-                ViewBag.code = file.content;
-                ViewBag.fileID = file.fileID;
-                ViewBag.fileName = "You are editing " + file.fileName;
+                try
+                {
+                    var file = _service.getFileByID(fileID);
+                    ViewBag.code = file.content;
+                    ViewBag.fileID = file.fileID;
+                    ViewBag.fileName = "You are editing " + file.fileName;
+                }
+                catch (Exception ex)
+                {
+                    return View("Error", ex);
+                }
+                
             }
             else
             {
