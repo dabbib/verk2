@@ -44,9 +44,9 @@ namespace h37.Controllers
         [Authorize]
         public ActionResult SubscribeUser(string userName, int projectID)
         {
-            string userID = _uService.getUserByName(userName).Id;
             try
             {
+                string userID = _uService.getUserByName(userName).Id;
                 _uService.subscribeUser(userID, projectID);
             }
             catch (Exception e)
