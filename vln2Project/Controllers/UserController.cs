@@ -34,7 +34,14 @@ namespace h37.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// This function subscribes a user to given project.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="projectID"></param>
+        /// <returns>Reloads the page to show the new user subscribtion</returns>
         [HttpPost]
+        [Authorize]
         public ActionResult SubscribeUser(string userName, int projectID)
         {
             string userID = _uService.getUserByName(userName).Id;
@@ -42,26 +49,39 @@ namespace h37.Controllers
             {
                 _uService.subscribeUser(userID, projectID);
             }
-            catch (ArgumentException e)
+            catch (Exception e)
             {
-                return new HttpStatusCodeResult(403, e.Message);
+                return View("Error", e);
             }
             
             return RedirectToAction("Config", "Project", new { projectID = projectID });
         }
 
+        /// <summary>
+        /// This function usnsubscribes user from a given project.
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="projectID"></param>
+        /// <returns>Reloads the page</returns>
         [HttpGet]
+        [Authorize]
         public ActionResult Unsubscribe(string userID, int projectID)
         {
             _uService.unsubscribeUser(userID, projectID);
             return RedirectToAction("Index", "user");
         }
 
+        /// <summary>
+        /// This function allows project owner to remove users from project.
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="projectID"></param>
+        /// <returns>Reloads the page</returns>
         [HttpPost]
+        [Authorize]
         public ActionResult UnsubscribeUser(string userID, int projectID)
         {
             _uService.unsubscribeUser(userID, projectID);
-            
             return RedirectToAction("Config", "Project", new { projectID = projectID });
         }
     }
