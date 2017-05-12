@@ -32,6 +32,10 @@ namespace h37.Services
         /// <returns>Id of the created project</returns>
         public int createProject(string projectName, string userID, projectType type)
         {
+            if(projectName == "")
+            {
+                throw new Exception("Please provide name for you project");
+            }
             Project newProject = new Project(projectName, userID, type);
 
             try
@@ -57,7 +61,6 @@ namespace h37.Services
                 throw raise;
             }
 
-
             /* Create the index file for the new project */
             createFile(newProject.projectID, userID, "index");
             return newProject.projectID;
@@ -77,7 +80,7 @@ namespace h37.Services
 
             if (p == null)
             {
-                /* Todo exceptions if project does not exist */
+                throw new Exception("The project does not exist");
             }
             return p;
         }
@@ -143,9 +146,15 @@ namespace h37.Services
                 deleteFile(x.fileID);
             }
 
-            /*
-             * Todo: Remove all links between the users of the project and the project
-             */
+            /* Remove all users from project */
+            var u = (from x in db.UsersInProjects
+                     where x.projectID.Equals(projectID)
+                     select x).ToList();
+            foreach(usersInProjects x in u)
+            {
+                db.UsersInProjects.Remove(x);
+                db.SaveChanges();
+            }
 
             db.Projects.Remove(getProjectByID(projectID));
             db.SaveChanges();
@@ -170,7 +179,7 @@ namespace h37.Services
                      select x).SingleOrDefault();
             if(f != null)
             {
-                throw new ArgumentException("This file name is already taken");
+                throw new Exception("This file name is already taken");
             }
             
             File newFile = new File(fileName +"."+ t, getProjectType(projectID).ToString(), projectID);
@@ -196,7 +205,7 @@ namespace h37.Services
         {
             if(model.fileID == 0)
             {
-                throw new ArgumentException("Can not save if there is no open file");
+                throw new Exception("Can not save if there is no open file");
             }
             var f = getFileByID(model.fileID);
             f.content = model.content;
@@ -217,7 +226,7 @@ namespace h37.Services
 
             if(f == null)
             {
-                /* Todo exception if búbú */
+                throw new Exception("File does not exist");
             }
 
             return f;

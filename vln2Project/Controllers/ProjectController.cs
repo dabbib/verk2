@@ -24,22 +24,12 @@ namespace h37.Controllers
         }
 
         /// <summary>
-        /// To get create project view
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult CreateProject()
-        {
-            ProjectCreateViewModel model = new ProjectCreateViewModel();
-            return View(model);
-        }
-
-        /// <summary>
-        /// To post information about created project
+        /// This function post information about newly created project to view.
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <returns>ProjectCreateViewModel</returns>
         [HttpPost]
+        [Authorize]
         public ActionResult CreateProject(ProjectCreateViewModel model)
         {
             if (ModelState.IsValid)
@@ -50,28 +40,49 @@ namespace h37.Controllers
                     return RedirectToAction("Edit", new { projectID = r });
 
                 }
-                catch (ArgumentException e)
+                catch (Exception e)
                 {
-                    return new HttpStatusCodeResult(403, e.Message);
+                    ViewBag.ReturnUrl = Request.Url.AbsoluteUri;
+                    return View("Error", e);
                 }
             }
             return View(model);
         }
 
+        /// <summary>
+        /// This function deletes a given project.
+        /// </summary>
+        /// <param name="projectID"></param>
+        /// <returns>Redirects to index for user</returns>
         public ActionResult DeleteProject(int projectID)
         {
-            _service.deleteProject(projectID);
+            try
+            {
+                _service.deleteProject(projectID);
+            }
+            catch (Exception e)
+            {
+                return View("Error", e);
+            }
             return RedirectToAction("Index", "User");
         }
 
         /// <summary>
-        /// 
+        /// This function gets the edit view for a given project or file in project
+        /// depending on the parameters.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="projectID"></param>
+        /// <param name="fileID"></param>
+        /// <returns>ProjectEditViewModel to project edit view</returns>
         [HttpGet]
+        [Authorize]
         [Route("/Edit/projectID:int/fileID:int")]
-        public ActionResult Edit(int projectID, int fileID = 0)
+        public ActionResult Edit(int projectID = 0, int fileID = 0)
         {
+            if(projectID == 0)
+            {
+                return RedirectToAction("Index", "User");
+            }
             var p = _service.getProjectByID(projectID);
             var e = _service.getEventLogForProject(projectID);
             var f = _service.getFiles(projectID);
@@ -90,10 +101,20 @@ namespace h37.Controllers
             return View(x);
         }
 
+        /// <summary>
+        /// This function sends information to the config view.
+        /// </summary>
+        /// <param name="projectID"></param>
+        /// <returns>ProjectConfigViewModel to config view.</returns>
         [HttpGet]
+        [Authorize]
         [Route ("/Project/Configure/projectID:int")]
-        public ActionResult Config(int projectID)
+        public ActionResult Config(int projectID = 0)
         {
+            if(projectID == 0)
+            {
+                return RedirectToAction("Index", "User");
+            }
             Project p = _service.getProjectByID(projectID);
             ProjectConfigViewModel model = new ProjectConfigViewModel();
             model.projectID = p.projectID;
@@ -106,14 +127,23 @@ namespace h37.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// This function reloads the config page.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns>Reloads the page</returns>
         [HttpPost]
+        [Authorize]
         [Route ("/Project/Configure/projectID:int")]
         public ActionResult SaveConfig(Project item)
         {
-
             return RedirectToAction("Index", "User");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult CreateFile()
         {
@@ -121,7 +151,13 @@ namespace h37.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// This function creates new files.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Reloads the page</returns>
         [HttpPost]
+        [Authorize]
         public ActionResult CreateFile(FileCreateViewModel model)
         {
             model.userID = User.Identity.GetUserId<string>();
@@ -131,24 +167,45 @@ namespace h37.Controllers
                 {
                     _service.createFile(model.projectID, model.userID, model.fileName);
                 }
-                catch (ArgumentException e)
+                catch (Exception e)
                 {
-                    return new HttpStatusCodeResult(403, e.Message);
+                    ViewBag.ReturnUrl = Request.Url.AbsoluteUri;
+                    return View("Error", e);
                 }
                 return RedirectToAction("Edit", new { projectID = model.projectID });
             }
             return null;
         }
 
+        /// <summary>
+        /// This function gets the edit view for a file in project.
+        /// </summary>
+        /// <param name="fileID"></param>
+        /// <param name="projectID"></param>
+        /// <returns>Sends file id and project to view.</returns>
         [HttpGet]
+        [Authorize]
         [Route("~/Project/Edit/projectID:int/fileID:int")]
         public ActionResult EditFile(int fileID, int projectID)
         {
-            ViewBag.Code = _service.getFileByID(fileID).content;
+            try
+            {
+                ViewBag.Code = _service.getFileByID(fileID).content;
+            }
+            catch (Exception e)
+            {
+                return View("Error", e);
+            }
             return RedirectToAction("Edit", new { projectID = projectID, fileID = fileID });
         }
 
+        /// <summary>
+        /// This function saves the file beeing edited and reloads the page.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Reloads the page.</returns>
         [HttpPost]
+        [Authorize]
         [Route("~/Project/Edit/projectID:int/fileID:int")]
         public ActionResult SaveFile(FileSaveViewModel model)
         {
@@ -156,17 +213,30 @@ namespace h37.Controllers
             {
                 _service.saveFileContent(model, User.Identity.GetUserId<string>());
             }
-            catch (ArgumentException e)
+            catch (Exception e)
             {
-                return new HttpStatusCodeResult(403, e.Message);
+                return View("Error", e);
             }
             return RedirectToAction("Edit", new { projectID = model.projectID, fileID = model.fileID });
         }
 
+        /// <summary>
+        /// This function deletes a given file.
+        /// </summary>
+        /// <param name="fileID"></param>
+        /// <returns>Reloads the page.</returns>
+        [Authorize]
         public ActionResult DeleteFile(int fileID)
         {
             var f = _service.getFileByID(fileID);
-            _service.deleteFile(fileID);
+            try
+            {   
+                _service.deleteFile(fileID);
+            }
+            catch (Exception e)
+            {
+                return View("Error", e);
+            }
             return RedirectToAction("Edit", new { projectID = f.projectID });
         }
 

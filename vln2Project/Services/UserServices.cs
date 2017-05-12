@@ -23,7 +23,7 @@ namespace h37.Services
 
         /// <summary>
         /// This function handles user subscribtions.
-        /// It hrows ArgumentException if user is already in project
+        /// It hrows Exception if user is already in project
         /// or if the user is the owner of the project.
         /// </summary>
         /// <param name="userID"></param>
@@ -36,11 +36,11 @@ namespace h37.Services
                      select v).SingleOrDefault();
             if(u != null)
             {
-                throw new ArgumentException("User already in project");
+                throw new Exception("User already in project");
             }
             if(_pService.getProjectByID(projectID).projectOwnerID.Equals(userID))
             {
-                throw new ArgumentException("User is owner of project");
+                throw new Exception("User is owner of project");
             }
             var x = new usersInProjects(userID, projectID);
             db.UsersInProjects.Add(x);
@@ -58,6 +58,10 @@ namespace h37.Services
                      where v.projectID.Equals(projectID)
                      & v.userID.Equals(userID)
                      select v).SingleOrDefault();
+            if(u == null)
+            {
+                throw new Exception("User already unsubscribed");
+            }
             db.UsersInProjects.Remove(u);
             db.SaveChanges();
         }
